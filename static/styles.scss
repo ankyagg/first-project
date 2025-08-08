@@ -10,34 +10,134 @@
 #dark #webcam {
     border-radius: 10px;
     border: 5px solid rgb(194, 135, 25);
-    width: 500px;
-    height: 400px;
+
+    $main-bg: #8bd4d4;
+    $main-bg2: #AEEEEE;
+    $hero-img: '../templates/Home.jpg';
+    $webcam-border: rgb(25, 194, 194);
+    $webcam-border-dark: rgb(194, 135, 25);
+    $nav-bg: white;
+    $nav-link: grey;
+    $nav-link-hover: palevioletred;
+    $font-main: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* Light theme (default body) */
-body {
-    background-color: #8bd4d4;
-    color: #1E293B;
-    animation: breathe 2s ease-in-out infinite;
-}
-
-/* Webcam styling inside light theme */
-body #webcam {
-    align-items: center;
-    border-radius: 10px;
-    border: 5px solid rgb(25, 194, 194);
-    width: 30em;
-    height: 30em;
-    margin: 3em auto;
-    display: block;
-}
-
-/* Breathing animation */
-@keyframes breathe {
-    0%, 100% {
-        background-color: #8bd4d4;
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
     }
-    50% {
-        background-color: #AEEEEE;
+
+    .hero {
+        height: 100vh;
+        margin-top: 0;
+        background-image: url(#{$hero-img});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
-}
+
+    h1 {
+        font-size: 100px;
+        font-family: $font-main;
+        animation: breathing 8s ease-in-out infinite;
+    }
+
+    @keyframes breathing {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+
+    .typewriter {
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 3px solid rgba(255,255,255,0.75);
+        width: 0;
+        animation: typing 8s steps(40,end) infinite, blink 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+        0% { width: 0 }
+        50% { width: 30% }
+        80%{ width: 30%}
+        100% { width: 0 }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent }
+    }
+
+    .nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 70%;
+        background: $nav-bg;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1rem 0;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        margin-left: 250px;
+        margin-bottom: 50px;
+        border-radius: 40px;
+        font-family: $font-main;
+
+        a {
+            color: $nav-link;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+
+            &:hover {
+                color: $nav-link-hover;
+                text-shadow: 0 0 18px $nav-link-hover, 0 0 20px $nav-link-hover;
+            }
+        }
+    }
+
+    .dark {
+        background-color: rgb(20, 20, 54);
+
+        h1 {
+            color: black;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        #webcam {
+            border-radius: 10px;
+            border: 5px solid $webcam-border-dark;
+            width: 500px;
+            height: 400px;
+        }
+    }
+
+    body {
+        background-image: url(#{$hero-img});
+        background-repeat: none;
+        background-size: auto;
+        color: #1E293B;
+        animation: breathe 2s ease-in-out infinite;
+
+        #webcam {
+            align-items: center;
+            border-radius: 10px;
+            border: 5px solid $webcam-border;
+            width: 30em;
+            height: 30em;
+            margin: 3em auto;
+            display: block;
+        }
+    }
+
+    @keyframes breathe {
+        0%, 100% { background-color: $main-bg; }
+        50% { background-color: $main-bg2; }
+    }

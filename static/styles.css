@@ -1,43 +1,90 @@
-/* Dark theme section */
-#dark {
+/*.dark {
   background-color: rgb(20, 20, 54);
+}*/
+body,html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
-
-#dark h1 {
-  color: red;
-}
-
-#dark #webcam {
-  border-radius: 10px;
-  border: 5px solid rgb(194, 135, 25);
-  width: 500px;
-  height: 400px;
-}
-
-/* Light theme (default body) */
-body {
-  background-color: #8bd4d4;
-  color: #1E293B;
-  animation: breathe 2s ease-in-out infinite;
-}
-
-/* Webcam styling inside light theme */
-body #webcam {
+.hero{
+  height: 100vh;
+  margin-top: 0;
+  background-image: url("../templates/Home.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  border: 5px solid rgb(25, 194, 194);
-  width: 30em;
-  height: 30em;
-  margin: 3em auto;
-  display: block;
+  flex-direction: column;
 }
-
-/* Breathing animation */
-@keyframes breathe {
-  0%, 100% {
-    background-color: #8bd4d4;
+h1{
+  font-size:100px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  animation: breathing 8s ease-in-out infinite;
+}
+@keyframes breathing {
+  0% {
+    transform: scale(1);
   }
   50% {
-    background-color: #AEEEEE;
+    transform: scale(0.9);
   }
-}/*# sourceMappingURL=styles.css.map */
+  100% {
+    transform: scale(1);
+  }
+
+}
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid rgba(255,255,255,0.75); /* blinking cursor */
+  width: 0;
+  animation: typing 8s steps(40,end) infinite, blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+    0% { width: 0 }
+  50% { width: 30% }
+  80%{ width: 30%}
+  100% { width: 0 }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+.nav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  margin-left: 250px;
+  margin-bottom: 50px;
+  border-radius: 40px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.nav a {
+  color: grey;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: palevioletred;
+  text-shadow: 0 0 18px palevioletred 0 0 20 palevioletred;
+}
+.dark h1 {
+  color: black;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Photo Strip</title>
+    <link rel="stylesheet" href="../static/style(a).css">
+    <style>
+        
+    </style>
+</head>
+<body id="edit">
+    <div class="edit-container">
+        <div class="left-panel">
+            <h2 class="panel-title">📸 Your Photo Strip</h2>
+            <canvas id="photoStripCanvas" width="400" height="600"></canvas>
+            <div class="canvas-info">
+                <p>Photo strip loaded from capture session</p>
+                <p>Ready for theme and sticker customization</p>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn download-btn" onclick="downloadFinalStrip()">💾 Download</button>
+                <button class="action-btn secondary-btn" onclick="goBackToCapture()">🔙 Back</button>
+            </div>
+        </div>
+
+        <!-- Right Panel - Themes and Stickers -->
+        <div class="right-panel">
+            <h2 class="panel-title">🎨 Customize Your Strip</h2>
+            
+            <!-- Themes Section -->
+            <h3 style="color: white; margin-bottom: 15px;">Themes & Backgrounds</h3>
+            <div class="themes-grid">
+                <div class="theme-card" onclick="applyTheme('classic')">
+                    <div class="theme-icon">🤍</div>
+                    <div class="theme-label">Classic</div>
+                    <div class="theme-desc">Clean white background</div>
+                </div>
+                <div class="theme-card" onclick="applyTheme('vintage')">
+                    <div class="theme-icon">📸</div>
+                    <div class="theme-label">Vintage</div>
+                    <div class="theme-desc">Retro photo booth style</div>
+                </div>
+                <div class="theme-card" onclick="applyTheme('party')">
+                    <div class="theme-icon">🎉</div>
+                    <div class="theme-label">Party</div>
+                    <div class="theme-desc">Colorful celebration theme</div>
+                </div>
+                <div class="theme-card" onclick="applyTheme('summer')">
+                    <div class="theme-icon">🌴</div>
+                    <div class="theme-label">Summer</div>
+                    <div class="theme-desc">Beach vibes background</div>
+                </div>
+                <div class="theme-card" onclick="applyTheme('hearts')">
+                    <div class="theme-icon">💕</div>
+                    <div class="theme-label">Love</div>
+                    <div class="theme-desc">Romantic pink theme</div>
+                </div>
+                <div class="theme-card" onclick="applyTheme('space')">
+                    <div class="theme-icon">🌟</div>
+                    <div class="theme-label">Space</div>
+                    <div class="theme-desc">Galaxy background</div>
+                </div>
+            </div>
+
+            <!-- Stickers Section -->
+            <div class="stickers-section">
+                <h3 style="color: white; margin-bottom: 15px;">Add Stickers</h3>
+                <div class="stickers-grid">
+                    <button class="sticker-btn" onclick="addSticker('❤️')">❤️</button>
+                    <button class="sticker-btn" onclick="addSticker('⭐')">⭐</button>
+                    <button class="sticker-btn" onclick="addSticker('✨')">✨</button>
+                    <button class="sticker-btn" onclick="addSticker('🎉')">🎉</button>
+                    <button class="sticker-btn" onclick="addSticker('🎊')">🎊</button>
+                    <button class="sticker-btn" onclick="addSticker('💫')">💫</button>
+                    <button class="sticker-btn" onclick="addSticker('🌟')">🌟</button>
+                    <button class="sticker-btn" onclick="addSticker('💖')">💖</button>
+                    <button class="sticker-btn" onclick="addSticker('🦄')">🦄</button>
+                    <button class="sticker-btn" onclick="addSticker('🌈')">🌈</button>
+                    <button class="sticker-btn" onclick="addSticker('😊')">😊</button>
+                    <button class="sticker-btn" onclick="addSticker('😍')">😍</button>
+                    <button class="sticker-btn" onclick="addSticker('🔥')">🔥</button>
+                    <button class="sticker-btn" onclick="addSticker('💯')">💯</button>
+                    <button class="sticker-btn" onclick="addSticker('👑')">👑</button>
+                    <button class="sticker-btn" onclick="addSticker('🎈')">🎈</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary-btn" onclick="clearDecorations()">🗑️ Clear All</button>
+                <button class="action-btn primary-btn" onclick="addCustomText()">📝 Add Text</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/edit.js"></script>
+</body>
+</html>
