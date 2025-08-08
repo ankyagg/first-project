@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="text/javascript" src="https://unpkg.com/webcam-easy@1.1.1/dist/webcam-easy.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photobooth</title>
+  <link rel="stylesheet" href="/static/styles.css" />
 </head>
-<body class="dark">
-    <h1>Say HI to your Photobooth 📸</h1>
-    <video id="webcam" autoplay playsinline></video>
-    <canvas id="canvas"></canvas>
-    <script>
-        const videoElement = document.getElementById('webcam');
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-      .then((stream) => {
-        videoElement.srcObject = stream; // Attach the webcam stream
-      })
-      .catch((err) => {
-        console.error("⚠️ Error accessing webcam:", err);
-        alert("Could not access your webcam. Please check browser permissions.");
-      });
-    </script>
+<body>
+  <span>Say HI to your Photobooth 📸</span><br>
+  <video id="webcam" autoplay playsinline></video>
+
+  <div class="filter-buttons">
+    <button onclick="setFilter('none')">Original</button>
+    <button onclick="setFilter('grayscale(100%)')">B&W</button>
+    <button onclick="setFilter('sepia(100%)')">Sepia</button>
+    <button onclick="setFilter('blur(4px)')">Blur</button>
+    <button onclick="setFilter('contrast(200%)')">Contrast</button>
+    <button onclick="setFilter('hue-rotate(90deg)')">Hue Shift</button>
+  </div>
+
+  <script src="/static/js/script.js" defer></script>
 </body>
 </html>
