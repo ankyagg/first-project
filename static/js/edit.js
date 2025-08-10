@@ -259,7 +259,9 @@ function downloadFinalStrip() {
     link.href = canvas.toDataURL('image/png');
     link.click();
     
-    alert('Final photo strip downloaded! 🎉');
+    setTimeout(() => {
+        window.location.href = 'printer-new.html';
+    }, 1000);
 }
 
 function goBackToCapture() {

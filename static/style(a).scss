@@ -113,12 +113,14 @@ html {
       position: absolute;
       top: 44%;
       left: 49%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) !important;
       width: 35em;
       height: 30em;
       border-radius: 20px;
       background-color: black;
       z-index: 1000;
+      margin: 0 auto;
+      display: block;
     }
     
     .capture-btn {
@@ -519,6 +521,9 @@ html {
 }
 #edit{
     background-image: url(../templates/Home.jpg);
+    background-size: cover;
+    background-repeat: none;
+    
     body {
         margin: 0;
         padding: 0;

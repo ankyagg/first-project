@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📸 Printing Photos 📸</title>
+    <style>
+        @font-face {
+            font-family: 'Outfit';
+            src: url("../fonts/OutfitRegular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Outfit';
+            src: url("../fonts/OutfitBold.ttf") format("truetype");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Main Container */
+        .printer-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Title at very top */
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .title {
+            font-size: clamp(28px, 4vw, 36px);
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 400;
+        }
+
+        /* PRINTER AT THE TOP */
+        .printer-machine {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px 40px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .printer-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .printer-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 4px;
+        }
+
+        .printer-status {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Printer Slot - WHERE PHOTOS COME FROM */
+        .printer-slot {
+            width: 200px;
+            height: 12px;
+            background: linear-gradient(180deg, #333, #000);
+            border-radius: 6px;
+            position: relative;
+            overflow: visible;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.8);
+            margin: 0 auto;
+        }
+
+        .slot-opening {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, #444, #000);
+            border-radius: 6px;
+        }
+
+        /* PHOTOS COMING OUT FROM PRINTER SLOT */
+        .photos-output {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: -10px; /* Connect to printer */
+        }
+
+        /* Individual Photo Cards Coming Out One by One */
+        .photo-card {
+            width: 200px;
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: 0;
+            transform: translateY(-120%);
+            opacity: 0;
+            z-index: 10;
+        }
+
+        /* Animation sequence - REVERSE ORDER: 3rd photo first, then 2nd, then 1st */
+        .photo-card.photo-3 {
+            animation: 
+                photoEmerge 1s ease-out 2s forwards,
+                photoPause 1s ease-out 3s forwards,
+                photoMoveDown1 0.8s ease-out 4s forwards;
+            z-index: 30;
+        }
+
+        .photo-card.photo-2 {
+            animation: 
+                photoEmerge 1s ease-out 5s forwards,
+                photoPause 1s ease-out 6s forwards,
+                photoMoveDown2 0.8s ease-out 7s forwards;
+            z-index: 20;
+        }
+
+        .photo-card.photo-1 {
+            animation: 
+                photoEmerge 1s ease-out 8s forwards,
+                photoPause 1s ease-out 9s forwards,
+                photoMoveDown3 0.8s ease-out 10s forwards;
+            z-index: 10;
+        }
+
+        .photo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .photo-number {
+            background: linear-gradient(135deg, #e91e63, #f06292);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .photo-timestamp {
+            font-size: 10px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .photo-frame {
+            aspect-ratio: 4/3;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-placeholder {
+            color: #dee2e6;
+            font-size: 20px;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 5.5s both;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .primary-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #e91e63;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Photo Emergence Animations */
+        @keyframes photoEmerge {
+            0% {
+                transform: translateY(-120%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes photoPause {
+            0%, 100% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes photoMoveDown1 {
+            0% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes photoMoveDown2 {
+            0% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(140px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes photoMoveDown3 {
+            0% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(260px);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .photo-card {
+                width: 160px;
+                padding: 12px;
+            }
+            
+            .printer-machine {
+                padding: 20px 30px;
+            }
+
+            .photo-card.photo-1 { top: 15px; }
+            .photo-card.photo-2 { top: 80px; }
+            .photo-card.photo-3 { top: 145px; }
+        }
+
+        @media (max-width: 480px) {
+            .photo-card {
+                width: 140px;
+                padding: 10px;
+            }
+
+            .printer-machine {
+                padding: 15px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="printer-container">
+        <!-- Title -->
+        <div class="header">
+            <h1 class="title">photos</h1>
+            <p class="subtitle">printing your memories...</p>
+        </div>
+
+        <!-- PRINTER AT THE TOP -->
+        <div class="printer-machine">
+            <div class="printer-display">
+                <div class="printer-brand">📸 photobooth</div>
+                <div class="printer-status" id="printerStatus">preparing to print...</div>
+            </div>
+            
+            <div class="printer-slot">
+                <div class="slot-opening"></div>
+            </div>
+        </div>
+
+        <!-- PHOTOS COMING OUT IN REVERSE ORDER: 3→2→1 -->
+        <div class="photos-output">
+            <!-- Photo Card 3 - FIRST to emerge (bottom of final stack) -->
+            <div class="photo-card photo-3">
+                <div class="photo-header">
+                    <div class="photo-number">3</div>
+                    <div class="photo-timestamp" id="timestamp3"></div>
+                </div>
+                <div class="photo-frame" id="photoFrame3">
+                    <div class="photo-placeholder">📷</div>
+                </div>
+            </div>
+
+            <!-- Photo Card 2 - SECOND to emerge (middle of final stack) -->
+            <div class="photo-card photo-2">
+                <div class="photo-header">
+                    <div class="photo-number">2</div>
+                    <div class="photo-timestamp" id="timestamp2"></div>
+                </div>
+                <div class="photo-frame" id="photoFrame2">
+                    <div class="photo-placeholder">📷</div>
+                </div>
+            </div>
+
+            <!-- Photo Card 1 - LAST to emerge (top of final stack) -->
+            <div class="photo-card photo-1">
+                <div class="photo-header">
+                    <div class="photo-number">1</div>
+                    <div class="photo-timestamp" id="timestamp1"></div>
+                </div>
+                <div class="photo-frame" id="photoFrame1">
+                    <div class="photo-placeholder">📷</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+            <button class="action-btn primary-btn" onclick="downloadPhotos()">
+                💾 Download
+            </button>
+            <button class="action-btn secondary-btn" onclick="goHome()">
+                📸 New Photos
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Animation sequence
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set timestamps
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            document.getElementById('timestamp1').textContent = timeString;
+            document.getElementById('timestamp2').textContent = timeString;
+            document.getElementById('timestamp3').textContent = timeString;
+            
+            // Status sequence - REVERSE ORDER: 3rd photo first
+            const statuses = [
+                'preparing to print...',
+                'printing photo 3...',
+                'photo 3 printed!',
+                'printing photo 2...',
+                'photo 2 printed!',
+                'printing photo 1...',
+                'photo 1 printed!',
+                'all photos complete! ✨'
+            ];
+            
+            const statusTiming = [1000, 2000, 4000, 5000, 7000, 8000, 10000];
+            
+            let statusIndex = 0;
+            const printerStatus = document.getElementById('printerStatus');
+            
+            statusTiming.forEach((delay, index) => {
+                setTimeout(() => {
+                    if (statusIndex < statuses.length) {
+                        printerStatus.textContent = statuses[statusIndex];
+                        statusIndex++;
+                    }
+                }, delay);
+            });
+            
+            // Load captured photos
+            loadCapturedPhotos();
+        });
+
+        // Load captured photos if available
+        function loadCapturedPhotos() {
+            const storedPhotos = localStorage.getItem('capturedPhotos');
+            if (storedPhotos) {
+                try {
+                    const photos = JSON.parse(storedPhotos);
+                    
+                    photos.forEach((photoUri, index) => {
+                        if (index < 3) {
+                            const frameId = `photoFrame${index + 1}`;
+                            const photoFrame = document.getElementById(frameId);
+                            
+                            if (photoFrame) {
+                                const img = document.createElement('img');
+                                img.src = photoUri;
+                                
+                                // Replace placeholder
+                                const placeholder = photoFrame.querySelector('.photo-placeholder');
+                                if (placeholder) {
+                                    placeholder.remove();
+                                }
+                                
+                                photoFrame.appendChild(img);
+                            }
+                        }
+                    });
+                } catch (e) {
+                    console.error('Error loading photos:', e);
+                }
+            }
+        }
+
+        // Button functions
+        function downloadPhotos() {
+            alert('🎉 Photos downloaded!');
+        }
+
+        function goHome() {
+            localStorage.removeItem('capturedPhotos');
+            window.location.href = '../capture.html';
+        }
+    </script>
+</body>
+</html>
