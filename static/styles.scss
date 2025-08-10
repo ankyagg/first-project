@@ -141,3 +141,132 @@
         0%, 100% { background-color: $main-bg; }
         50% { background-color: $main-bg2; }
     }
+
+// MOBILE RESPONSIVE MEDIA QUERIES ONLY
+@media (max-width: 768px) {
+    .hero {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    h1 {
+        font-size: clamp(48px, 12vw, 100px);
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .typewriter {
+        font-size: clamp(16px, 4vw, 24px);
+        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        font-family: $font-main;
+        margin-bottom: 40px;
+    }
+    
+    .nav {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        margin-left: 0;
+        margin-bottom: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+        a {
+            font-size: clamp(14px, 3vw, 1rem);
+            padding: 8px 12px;
+            border-radius: 20px;
+            min-height: 44px; // Better touch target
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background: rgba(236, 104, 166, 0.1);
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: clamp(36px, 10vw, 60px);
+    }
+    
+    .typewriter {
+        font-size: clamp(14px, 3.5vw, 18px);
+    }
+    
+    .nav {
+        width: 95%;
+        bottom: 10px;
+        
+        a {
+            font-size: clamp(12px, 2.5vw, 16px);
+            padding: 6px 10px;
+        }
+    }
+}
+
+// Landscape Mobile Optimization
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: clamp(32px, 8vw, 48px);
+        margin-bottom: 10px;
+    }
+    
+    .typewriter {
+        font-size: clamp(12px, 2.5vw, 16px);
+        margin-bottom: 20px;
+    }
+    
+    .nav {
+        bottom: 10px;
+        width: 80%;
+        padding: 0.8rem 0;
+        
+        a {
+            font-size: clamp(10px, 2vw, 14px);
+            padding: 4px 8px;
+        }
+    }
+}
+
+// Touch Device Optimizations
+@media (hover: none) and (pointer: coarse) {
+    .nav a {
+        min-height: 48px;
+        min-width: 48px;
+        
+        &:hover {
+            background: none; // Remove hover effects on touch devices
+        }
+        
+        &:active {
+            background: rgba(236, 104, 166, 0.2);
+            transform: scale(0.95);
+            transition: all 0.1s ease;
+        }
+    }
+}
+
+// High DPI Display Support
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    h1, .typewriter {
+        // Ensure crisp text rendering on high DPI displays
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}

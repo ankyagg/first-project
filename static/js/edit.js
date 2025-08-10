@@ -50,16 +50,15 @@ function drawPhotoStrip() {
     const canvas = document.getElementById('photoStripCanvas');
     const ctx = canvas.getContext('2d');
     
- 
-    const photoCount = capturedPhotos.length;
-    const photoWidth = 320;
-    const photoHeight = 120;
-    const spacing = 20;
-    const padding = 40;
+    // Use the proper 700x2100 dimensions for vertical photobooth strip
+    canvas.width = 700;
+    canvas.height = 2100;
     
- 
-    canvas.width = 400;
-    canvas.height = padding + (photoHeight * photoCount) + (spacing * (photoCount - 1)) + padding;
+    const photoCount = capturedPhotos.length;
+    const photoWidth = 600; // Leave some margin on sides like classic photobooth
+    const photoHeight = 500; // Better proportion for photos
+    const spacing = 80; // More space between photos to show theme
+    const padding = 60; // More padding for classic look
     
 
     applyThemeBackground(ctx);
@@ -68,23 +67,24 @@ function drawPhotoStrip() {
     capturedPhotos.forEach((photoUri, index) => {
         const img = new Image();
         img.onload = function() {
-            const startX = (canvas.width - photoWidth) / 2;
+            // Calculate vertical layout for photobooth strip
+            const totalPhotoHeight = (photoHeight * photoCount) + (spacing * (photoCount - 1));
             const startY = padding;
+            const photoX = (canvas.width - photoWidth) / 2; // Center photos horizontally
             const photoY = startY + (index * (photoHeight + spacing));
             
-            // Draw photo frame
+            // Draw photo with subtle border like classic photobooth
             ctx.fillStyle = '#ffffff';
-            ctx.fillRect(startX - 5, photoY - 5, photoWidth + 10, photoHeight + 10);
+            ctx.fillRect(photoX - 2, photoY - 2, photoWidth + 4, photoHeight + 4);
             ctx.strokeStyle = '#e0e0e0';
             ctx.lineWidth = 1;
-            ctx.strokeRect(startX - 5, photoY - 5, photoWidth + 10, photoHeight + 10);
+            ctx.strokeRect(photoX - 2, photoY - 2, photoWidth + 4, photoHeight + 4);
             
-        
-            ctx.drawImage(img, startX, photoY, photoWidth, photoHeight);
+            // Draw the photo
+            ctx.drawImage(img, photoX, photoY, photoWidth, photoHeight);
             
             loadedCount++;
             if (loadedCount === capturedPhotos.length) {
-                
                 drawDecorations();
             }
         };
@@ -92,10 +92,17 @@ function drawPhotoStrip() {
     });
     
     
+    // Draw title at the top
     ctx.fillStyle = getThemeTextColor();
-    ctx.font = 'bold 16px Arial';
+    ctx.font = 'bold 32px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('photobooth', canvas.width / 2, 25);
+    ctx.fillText('photobooth', canvas.width / 2, 40);
+    
+    // Add date stamp at the bottom
+    const today = new Date();
+    const dateString = today.toLocaleDateString();
+    ctx.font = 'bold 18px Arial';
+    ctx.fillText(dateString, canvas.width / 2, canvas.height - 25);
 }
 
 function applyThemeBackground(ctx) {

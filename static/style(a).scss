@@ -53,6 +53,7 @@
     font-weight: 900;
     font-style: normal;
 }
+
 $webcam-border-dark: rgb(194, 135, 25);
 $hero-img: '../templates/Home.jpg';
 
@@ -99,7 +100,9 @@ html {
       border-radius: 20px;
       height: 85vh;
       position: absolute;
-      right:30%;
+      right: 30%;
+      backdrop-filter: blur(10px);
+      z-index: 1;
     }
     .camcapture{
         width:62%;
@@ -107,6 +110,7 @@ html {
         position: absolute;
         top:0%;
         left:19%;
+        z-index: 2;
     }
     
     #webcam {
@@ -140,6 +144,7 @@ html {
       gap:15%;
       font-size: 16px;
       width:30%;
+      z-index: 1001;
       svg{
         color:#EC68A6;
       }
@@ -493,32 +498,212 @@ html {
     }
 }
 
-// Responsive Design
-@media (max-width: 480px) {
-    .filters .container {
-        max-width: 280px;
-    }
-    
-    .filters .filter-panel {
-        padding: 20px;
-    }
-    
-    .filters .title {
-        font-size: 20px;
-    }
-    
-    .filters .filter-button {
-        padding: 16px 12px;
-    }
-    
-    .filters .filter-icon {
-        font-size: 28px;
-    }
-    
-    .filters .filter-label {
-        font-size: 12px;
+// MOBILE RESPONSIVE MEDIA QUERIES ONLY
+@media (max-width: 768px) {
+    #capture {
+        padding-top: 2%;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        
+        .line1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .webcam-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            height: auto !important;
+            position: relative !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 20px !important;
+            width: 100% !important;
+            
+            .bg {
+                display: none !important; // Hide decorative bg on mobile
+            }
+            
+            .camcapture {
+                width: 90% !important;
+                height: auto !important;
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
+                order: 2 !important; // Place webcam after filters
+                margin: 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            #webcam {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                transform: none !important;
+                width: 100% !important;
+                max-width: 350px !important;
+                height: auto !important;
+                aspect-ratio: 4/3 !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+            
+            .capture-btn {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                transform: none !important;
+                width: 60% !important;
+                max-width: 200px !important;
+                margin: 20px auto 0 auto !important;
+                padding: 12px 16px !important;
+                font-size: 14px !important;
+                min-height: 50px !important; // Better touch target
+            }
+        }
+        
+        // Mobile Gallery
+        .gallery-section {
+            position: relative !important;
+            top: 0 !important;
+            right: 0 !important;
+            width: 90% !important;
+            height: auto !important;
+            margin: 20px auto !important;
+            max-width: 400px !important;
+            order: 3 !important; // Place gallery after webcam
+            
+            .gallery-container {
+                max-height: 300px !important;
+                padding: 16px !important;
+            }
+            
+            .gallery-title {
+                font-size: 16px !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 8px !important;
+                max-height: 200px !important;
+            }
+            
+            .gallery-item {
+                min-height: 60px !important; // Better touch target
+            }
+            
+            .done-btn {
+                min-height: 50px !important; // Better touch target
+            }
+        }
+        
+        // Mobile Filters
+        .color-bg {
+            display: none !important; // Hide on mobile
+        }
+        
+        .filters {
+            position: relative !important;
+            width: 90% !important;
+            margin: 20px auto !important;
+            left: 0 !important;
+            order: 1 !important; // Place filters first
+            
+            .container {
+                max-width: 100% !important;
+            }
+            
+            .filter-panel {
+                left: 0 !important;
+                padding: 16px !important;
+                margin: 0 !important;
+                
+                .title {
+                    font-size: 20px !important;
+                }
+                
+                .subtitle {
+                    font-size: 12px !important;
+                }
+                
+                .filter-grid {
+                    grid-template-columns: repeat(3, 1fr) !important;
+                    gap: 8px !important;
+                    margin-bottom: 16px !important;
+                }
+                
+                .filter-button {
+                    padding: 12px 8px !important;
+                    min-height: 80px !important; // Better touch target
+                    
+                    .filter-icon {
+                        font-size: 24px !important;
+                    }
+                    
+                    .filter-label {
+                        font-size: 11px !important;
+                    }
+                }
+            }
+        }
     }
 }
+
+@media (max-width: 480px) {
+    #capture {
+        .line1 {
+            font-size: 28px;
+        }
+        
+        .webcam-container {
+            .camcapture {
+                width: 95%;
+            }
+            
+            #webcam {
+                max-width: 300px;
+            }
+            
+            .capture-btn {
+                width: 70%;
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
+        
+        .gallery-section {
+            width: 95%;
+            
+            .gallery-container {
+                padding: 12px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .filters {
+            width: 95%;
+            
+            .filter-panel {
+                padding: 12px;
+                
+                .filter-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+        }
+    }
+}
+
+// EDIT PAGE STYLES
 #edit{
     background-image: url(../templates/Home.jpg);
     background-size: cover;
@@ -576,6 +761,11 @@ html {
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         max-width: 100%;
         max-height: 70vh;
+        display: block;
+        margin: 0 auto;
+        aspect-ratio: 1/3;
+        width: 100%;
+        height: auto;
     }
 
     .canvas-info {
@@ -685,5 +875,186 @@ html {
     .download-btn {
         background: #2196F3;
         color: white;
+    }
+}
+
+// EDIT PAGE MOBILE RESPONSIVENESS
+@media (max-width: 768px) {
+    #edit {
+        .edit-container {
+            flex-direction: column;
+            padding: 10px;
+            gap: 10px;
+            height: auto;
+            min-height: 100vh;
+        }
+        
+        .left-panel {
+            flex: none;
+            order: 2;
+            padding: 15px;
+            
+            #photoStripCanvas {
+                max-width: 100%;
+                max-height: 70vh;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/3;
+                min-height: 400px;
+                object-fit: contain;
+            }
+        }
+        
+        .right-panel {
+            flex: none;
+            order: 1;
+            padding: 15px;
+            max-height: none;
+            overflow: visible;
+        }
+        
+        .panel-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .themes-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .theme-card {
+            padding: 15px;
+            min-height: 100px; // Better touch target
+            
+            .theme-icon {
+                font-size: 30px;
+                margin-bottom: 8px;
+            }
+            
+            .theme-label {
+                font-size: 14px;
+            }
+            
+            .theme-desc {
+                font-size: 11px;
+            }
+        }
+        
+        .stickers-grid {
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+        
+        .sticker-btn {
+            padding: 10px;
+            font-size: 20px;
+            min-height: 50px; // Better touch target
+        }
+        
+        .action-buttons {
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 16px;
+            font-size: 14px;
+            min-height: 50px; // Better touch target
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #edit {
+        .edit-container {
+            padding: 5px;
+        }
+        
+        .left-panel, .right-panel {
+            padding: 10px;
+        }
+        
+        .left-panel {
+            #photoStripCanvas {
+                max-height: 65vh;
+                min-height: 500px;
+                aspect-ratio: 1/3;
+            }
+        }
+        
+        .panel-title {
+            font-size: 18px;
+        }
+        
+        .themes-grid {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+        
+        .theme-card {
+            padding: 12px;
+            
+            .theme-icon {
+                font-size: 24px;
+            }
+        }
+        
+        .stickers-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        
+        .sticker-btn {
+            padding: 8px;
+            font-size: 18px;
+        }
+        
+        .action-btn {
+            min-width: 100px;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+    }
+}
+
+// TOUCH DEVICE OPTIMIZATIONS
+@media (hover: none) and (pointer: coarse) {
+    .filter-button,
+    .gallery-item,
+    .theme-card,
+    .sticker-btn,
+    .action-btn,
+    .capture-btn,
+    .done-btn {
+        // Larger touch targets
+        min-height: 44px;
+        min-width: 44px;
+        
+        &:hover {
+            transform: none; // Remove hover effects on touch devices
+        }
+        
+        &:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+    }
+    
+    // Larger tap targets for mobile
+    .gallery-grid {
+        gap: 12px;
+    }
+    
+    .filter-grid {
+        gap: 12px;
+    }
+    
+    .stickers-grid {
+        gap: 12px;
     }
 }

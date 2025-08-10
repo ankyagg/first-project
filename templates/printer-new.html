@@ -198,6 +198,11 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            width: 90%;
+            max-width: 400px;
             gap: 15px; /* Reduced gap */
             opacity: 0;
             animation: fadeInUp 1s ease-out 8s both; /* Delayed to match longer printing */
@@ -288,28 +293,193 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .photo-card {
-                width: 160px;
-                padding: 12px;
+            .printer-container {
+                padding: 10px;
+            }
+            
+            .header {
+                margin: 10px 0;
+            }
+            
+            .title {
+                font-size: clamp(24px, 6vw, 36px);
+            }
+            
+            .subtitle {
+                font-size: 12px;
             }
             
             .printer-machine {
-                padding: 20px 30px;
+                padding: 15px 20px;
+                margin-bottom: 10px;
             }
-
-            .photo-card.photo-1 { top: 15px; }
-            .photo-card.photo-2 { top: 80px; }
-            .photo-card.photo-3 { top: 145px; }
+            
+            .printer-brand {
+                font-size: 14px;
+            }
+            
+            .printer-status {
+                font-size: 11px;
+            }
+            
+            .printer-slot {
+                width: 240px;
+                height: 14px;
+            }
+            
+            .edited-strip {
+                width: 240px;
+                padding: 12px;
+                top: 40px;
+            }
+            
+            .strip-content {
+                max-height: 40vh;
+            }
+            
+            .strip-content img {
+                max-height: 40vh;
+            }
+            
+            .action-section {
+                bottom: 15px;
+                gap: 10px;
+            }
+            
+            .action-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+                min-width: 100px;
+                min-height: 44px;
+            }
         }
 
         @media (max-width: 480px) {
-            .photo-card {
-                width: 140px;
-                padding: 10px;
+            .printer-container {
+                padding: 5px;
             }
-
+            
+            .header {
+                margin: 5px 0;
+            }
+            
+            .title {
+                font-size: clamp(20px, 5vw, 28px);
+            }
+            
+            .subtitle {
+                font-size: 11px;
+            }
+            
             .printer-machine {
-                padding: 15px 25px;
+                padding: 12px 16px;
+                margin-bottom: 8px;
+            }
+            
+            .printer-brand {
+                font-size: 12px;
+            }
+            
+            .printer-status {
+                font-size: 10px;
+            }
+            
+            .printer-slot {
+                width: 200px;
+                height: 12px;
+            }
+            
+            .edited-strip {
+                width: 200px;
+                padding: 10px;
+                top: 30px;
+            }
+            
+            .strip-content {
+                max-height: 35vh;
+            }
+            
+            .strip-content img {
+                max-height: 35vh;
+            }
+            
+            .action-section {
+                bottom: 10px;
+                gap: 8px;
+                width: 95%;
+            }
+            
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+                min-width: 80px;
+                min-height: 40px;
+            }
+        }
+        
+        /* Landscape Mobile Optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .printer-container {
+                padding: 5px;
+            }
+            
+            .header {
+                margin: 5px 0;
+            }
+            
+            .title {
+                font-size: clamp(18px, 4vw, 24px);
+            }
+            
+            .subtitle {
+                font-size: 10px;
+            }
+            
+            .printer-machine {
+                padding: 10px 15px;
+                margin-bottom: 5px;
+            }
+            
+            .edited-strip {
+                top: 25px;
+                max-height: 50vh;
+            }
+            
+            .strip-content {
+                max-height: 45vh;
+            }
+            
+            .strip-content img {
+                max-height: 45vh;
+            }
+            
+            .action-section {
+                bottom: 5px;
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .action-btn {
+                min-height: 48px;
+                min-width: 48px;
+                
+                &:hover {
+                    transform: none;
+                }
+                
+                &:active {
+                    transform: scale(0.95);
+                    transition: transform 0.1s ease;
+                }
+            }
+        }
+        
+        /* High DPI Display Support */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .title, .subtitle, .printer-brand, .printer-status {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
         }
     </style>
