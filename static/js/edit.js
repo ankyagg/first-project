@@ -254,13 +254,20 @@ function clearDecorations() {
 
 function downloadFinalStrip() {
     const canvas = document.getElementById('photoStripCanvas');
+    
+    // Save the edited canvas (with themes and stickers) to localStorage
+    const editedStripData = canvas.toDataURL('image/png');
+    localStorage.setItem('editedPhotoStrip', editedStripData);
+    
+    // Also download for user
     const link = document.createElement('a');
     link.download = 'final-photo-strip.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = editedStripData;
     link.click();
     
+    // Redirect to printer animation
     setTimeout(() => {
-        window.location.href = 'printer-new.html';
+        window.location.href = '../templates/printer-new.html';
     }, 1000);
 }
 
@@ -269,5 +276,5 @@ function goBackToCapture() {
     localStorage.removeItem('capturedPhotos');
     
     // Navigate back to capture page
-    window.location.href = 'capture.html';
+    window.location.href = '../templates/capture.html';
 }

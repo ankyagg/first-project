@@ -64,20 +64,20 @@
             font-weight: 400;
         }
 
-        /* PRINTER AT THE TOP */
+        /* PRINTER AT THE TOP - ALLOWS OVERLAP */
         .printer-machine {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px 40px;
+            border-radius: 16px;
+            padding: 20px 40px; /* Reduced padding for compact size */
             box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.1),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: fadeInUp 1s ease-out 0.3s both;
             border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
-            z-index: 100;
+            z-index: 100; /* Lower than strip to allow overlap */
         }
 
         .printer-display {
@@ -86,28 +86,29 @@
         }
 
         .printer-brand {
-            font-size: 18px;
+            font-size: 16px; /* Reduced */
             font-weight: 700;
             color: #e91e63;
             margin-bottom: 4px;
         }
 
         .printer-status {
-            font-size: 12px;
+            font-size: 12px; /* Reduced */
             color: #666;
             font-weight: 500;
         }
 
-        /* Printer Slot - WHERE PHOTOS COME FROM */
+        /* Printer Slot - CLEAN BLACK OPENING */
         .printer-slot {
-            width: 200px;
-            height: 12px;
+            width: 280px;
+            height: 16px;
             background: linear-gradient(180deg, #333, #000);
-            border-radius: 6px;
+            border-radius: 8px;
             position: relative;
             overflow: visible;
-            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.8);
+            box-shadow: inset 0 6px 15px rgba(0, 0, 0, 0.8);
             margin: 0 auto;
+            z-index: 200;
         }
 
         .slot-opening {
@@ -117,10 +118,10 @@
             right: 0;
             height: 100%;
             background: linear-gradient(180deg, #444, #000);
-            border-radius: 6px;
+            border-radius: 8px;
         }
 
-        /* PHOTOS COMING OUT FROM PRINTER SLOT */
+        /* EDITED PHOTO STRIP CONTAINER - POSITIONED BELOW PRINTER */
         .photos-output {
             flex: 1;
             display: flex;
@@ -128,13 +129,16 @@
             align-items: center;
             position: relative;
             width: 100%;
-            overflow: hidden;
-            margin-top: -10px; /* Connect to printer */
+            overflow: hidden; /* Hide strip until it's ready to emerge */
+            margin-top: 10px; /* Position below printer, not overlapping */
+            z-index: 50;
+            min-height: 400px; /* Space for strip to emerge into */
         }
 
-        /* Individual Photo Cards Coming Out One by One */
-        .photo-card {
-            width: 200px;
+        /* The Final Edited Photo Strip - HIDDEN UNTIL BELOW PRINTER */
+        .edited-strip {
+            width: 280px; /* Match printer slot width */
+            max-height: 60vh; 
             background: white;
             border-radius: 16px;
             padding: 16px;
@@ -143,105 +147,70 @@
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
             border: 2px solid rgba(255, 255, 255, 0.3);
             position: absolute;
-            top: 0;
-            transform: translateY(-120%);
-            opacity: 0;
-            z-index: 10;
-        }
-
-        /* Animation sequence - REVERSE ORDER: 3rd photo first, then 2nd, then 1st */
-        .photo-card.photo-3 {
-            animation: 
-                photoEmerge 1s ease-out 2s forwards,
-                photoPause 1s ease-out 3s forwards,
-                photoMoveDown1 0.8s ease-out 4s forwards;
-            z-index: 30;
-        }
-
-        .photo-card.photo-2 {
-            animation: 
-                photoEmerge 1s ease-out 5s forwards,
-                photoPause 1s ease-out 6s forwards,
-                photoMoveDown2 0.8s ease-out 7s forwards;
-            z-index: 20;
-        }
-
-        .photo-card.photo-1 {
-            animation: 
-                photoEmerge 1s ease-out 8s forwards,
-                photoPause 1s ease-out 9s forwards,
-                photoMoveDown3 0.8s ease-out 10s forwards;
-            z-index: 10;
-        }
-
-        .photo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .photo-number {
-            background: linear-gradient(135deg, #e91e63, #f06292);
-            color: white;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            min-width: 24px;
-            text-align: center;
-        }
-
-        .photo-timestamp {
-            font-size: 10px;
-            color: #999;
-            font-weight: 500;
-        }
-
-        .photo-frame {
-            aspect-ratio: 4/3;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 2px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            top: 50px; /* Position below printer area */
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%); /* Start hidden */
+            opacity: 0; /* Initially invisible */
+            z-index: 300; /* Above everything */
+            animation: emergeFromBelowPrinter 5s ease-out 2s forwards;
             overflow: hidden;
         }
 
-        .photo-frame img {
+        .strip-content {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 50vh; /* Ensure image content fits viewport */
         }
 
-        .photo-placeholder {
-            color: #dee2e6;
-            font-size: 20px;
+        .strip-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            max-height: 50vh; /* Limit image height */
+            object-fit: contain; /* Maintain aspect ratio */
+        }
+
+        .strip-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .strip-brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 4px;
+        }
+
+        .strip-date {
+            font-size: 11px;
+            color: #999;
+            font-weight: 500;
         }
 
         /* Action Buttons */
         .action-section {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px; /* Reduced bottom spacing */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 15px; /* Reduced gap */
             opacity: 0;
-            animation: fadeInUp 1s ease-out 5.5s both;
+            animation: fadeInUp 1s ease-out 8s both; /* Delayed to match longer printing */
         }
 
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
+            gap: 8px; /* Reduced gap */
+            padding: 12px 20px; /* Reduced padding */
             border: none;
-            border-radius: 20px;
-            font-size: 14px;
+            border-radius: 16px; /* Reduced radius */
+            font-size: 13px; /* Reduced font size */
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -289,54 +258,30 @@
             }
         }
 
-        /* Photo Emergence Animations */
-        @keyframes photoEmerge {
+        /* Strip Emerges ONLY From Below Printer Area */
+        @keyframes emergeFromBelowPrinter {
             0% {
-                transform: translateY(-120%);
+                transform: translateX(-50%) translateY(-100%); /* Hidden below printer area */
                 opacity: 0;
             }
-            100% {
-                transform: translateY(20px);
+            30% {
+                transform: translateX(-50%) translateY(-100%); /* Stay hidden longer */
+                opacity: 0;
+            }
+            40% {
+                opacity: 1; /* Become visible only when emerging */
+                transform: translateX(-50%) translateY(-80%); /* Start emerging */
+            }
+            60% {
+                transform: translateX(-50%) translateY(-50%); /* Half emerged */
                 opacity: 1;
             }
-        }
-
-        @keyframes photoPause {
-            0%, 100% {
-                transform: translateY(20px);
-                opacity: 1;
-            }
-        }
-
-        @keyframes photoMoveDown1 {
-            0% {
-                transform: translateY(20px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(20px);
-                opacity: 1;
-            }
-        }
-
-        @keyframes photoMoveDown2 {
-            0% {
-                transform: translateY(20px);
+            80% {
+                transform: translateX(-50%) translateY(-20%); /* Almost out */
                 opacity: 1;
             }
             100% {
-                transform: translateY(140px);
-                opacity: 1;
-            }
-        }
-
-        @keyframes photoMoveDown3 {
-            0% {
-                transform: translateY(20px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(260px);
+                transform: translateX(-50%) translateY(10px); /* Fully emerged */
                 opacity: 1;
             }
         }
@@ -389,38 +334,18 @@
             </div>
         </div>
 
-        <!-- PHOTOS COMING OUT IN REVERSE ORDER: 3→2→1 -->
+        <!-- EDITED PHOTO STRIP COMING OUT FROM BELOW PRINTER -->
         <div class="photos-output">
-            <!-- Photo Card 3 - FIRST to emerge (bottom of final stack) -->
-            <div class="photo-card photo-3">
-                <div class="photo-header">
-                    <div class="photo-number">3</div>
-                    <div class="photo-timestamp" id="timestamp3"></div>
+            <div class="edited-strip" id="editedStrip">
+                <div class="strip-header">
+                    <div class="strip-brand">📸 photobooth</div>
+                    <div class="strip-date" id="stripDate"></div>
                 </div>
-                <div class="photo-frame" id="photoFrame3">
-                    <div class="photo-placeholder">📷</div>
-                </div>
-            </div>
-
-            <!-- Photo Card 2 - SECOND to emerge (middle of final stack) -->
-            <div class="photo-card photo-2">
-                <div class="photo-header">
-                    <div class="photo-number">2</div>
-                    <div class="photo-timestamp" id="timestamp2"></div>
-                </div>
-                <div class="photo-frame" id="photoFrame2">
-                    <div class="photo-placeholder">📷</div>
-                </div>
-            </div>
-
-            <!-- Photo Card 1 - LAST to emerge (top of final stack) -->
-            <div class="photo-card photo-1">
-                <div class="photo-header">
-                    <div class="photo-number">1</div>
-                    <div class="photo-timestamp" id="timestamp1"></div>
-                </div>
-                <div class="photo-frame" id="photoFrame1">
-                    <div class="photo-placeholder">📷</div>
+                <div class="strip-content" id="stripContent">
+                    <!-- Edited canvas will be loaded here -->
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        Loading your edited strip...
+                    </div>
                 </div>
             </div>
         </div>
@@ -439,27 +364,22 @@
     <script>
         // Animation sequence
         document.addEventListener('DOMContentLoaded', function() {
-            // Set timestamps
+            // Set date
             const now = new Date();
-            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const dateString = now.toLocaleDateString();
+            document.getElementById('stripDate').textContent = dateString;
             
-            document.getElementById('timestamp1').textContent = timeString;
-            document.getElementById('timestamp2').textContent = timeString;
-            document.getElementById('timestamp3').textContent = timeString;
-            
-            // Status sequence - REVERSE ORDER: 3rd photo first
+            // Status sequence for 5-second printing (1.5+ sec per photo)
             const statuses = [
                 'preparing to print...',
-                'printing photo 3...',
-                'photo 3 printed!',
-                'printing photo 2...',
-                'photo 2 printed!',
                 'printing photo 1...',
-                'photo 1 printed!',
-                'all photos complete! ✨'
+                'printing photo 2...',
+                'printing photo 3...',
+                'finalizing...',
+                'strip complete! ✨'
             ];
             
-            const statusTiming = [1000, 2000, 4000, 5000, 7000, 8000, 10000];
+            const statusTiming = [1000, 2500, 4000, 5500, 6500, 7500];
             
             let statusIndex = 0;
             const printerStatus = document.getElementById('printerStatus');
@@ -473,50 +393,58 @@
                 }, delay);
             });
             
-            // Load captured photos
-            loadCapturedPhotos();
+            // Load the edited canvas
+            loadEditedStrip();
         });
 
-        // Load captured photos if available
-        function loadCapturedPhotos() {
-            const storedPhotos = localStorage.getItem('capturedPhotos');
-            if (storedPhotos) {
-                try {
-                    const photos = JSON.parse(storedPhotos);
-                    
-                    photos.forEach((photoUri, index) => {
-                        if (index < 3) {
-                            const frameId = `photoFrame${index + 1}`;
-                            const photoFrame = document.getElementById(frameId);
-                            
-                            if (photoFrame) {
-                                const img = document.createElement('img');
-                                img.src = photoUri;
-                                
-                                // Replace placeholder
-                                const placeholder = photoFrame.querySelector('.photo-placeholder');
-                                if (placeholder) {
-                                    placeholder.remove();
-                                }
-                                
-                                photoFrame.appendChild(img);
-                            }
-                        }
-                    });
-                } catch (e) {
-                    console.error('Error loading photos:', e);
-                }
+        // Load the edited photo strip with themes and stickers
+        function loadEditedStrip() {
+            const editedStripData = localStorage.getItem('editedPhotoStrip');
+            if (editedStripData) {
+                const img = document.createElement('img');
+                img.src = editedStripData;
+                img.style.cssText = `
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    border-radius: 12px;
+                `;
+                
+                // Replace loading message
+                const stripContent = document.getElementById('stripContent');
+                stripContent.innerHTML = '';
+                stripContent.appendChild(img);
+            } else {
+                // Fallback - show message
+                document.getElementById('stripContent').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        No edited strip found.<br>
+                        <small>Please go back and create your strip.</small>
+                    </div>
+                `;
             }
         }
 
         // Button functions
         function downloadPhotos() {
-            alert('🎉 Photos downloaded!');
+            // Download the edited strip again
+            const editedStripData = localStorage.getItem('editedPhotoStrip');
+            if (editedStripData) {
+                const link = document.createElement('a');
+                link.download = `edited-photo-strip-${new Date().getTime()}.png`;
+                link.href = editedStripData;
+                link.click();
+                alert('🎉 Edited photo strip downloaded!');
+            } else {
+                alert('No edited strip found to download.');
+            }
         }
 
         function goHome() {
+            // Clear stored data and go back
             localStorage.removeItem('capturedPhotos');
-            window.location.href = '../capture.html';
+            localStorage.removeItem('editedPhotoStrip');
+            window.location.href = 'capture.html';
         }
     </script>
 </body>
