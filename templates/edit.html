@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Photo Strip</title>
     <link rel="stylesheet" href="../static/style(a).css">
+    <script src="../static/js/edit.js"></script>
     <style>
-        
+
     </style>
 </head>
 <body id="edit">
     <div class="edit-container">
         <div class="left-panel">
             <h2 class="panel-title">📸 Your Photo Strip</h2>
+            <div id="frameContainer" class="frame-container">
             <canvas id="photoStripCanvas" width="400" height="600"></canvas>
             <div class="canvas-info">
                 <p>Photo strip loaded from capture session</p>
@@ -23,11 +25,12 @@
                 <button class="action-btn secondary-btn" onclick="goBackToCapture()">🔙 Back</button>
             </div>
         </div>
+        </div>
 
         <!-- Right Panel - Themes and Stickers -->
         <div class="right-panel">
             <h2 class="panel-title">🎨 Customize Your Strip</h2>
-            
+
             <!-- Themes Section -->
             <h3 style="color: white; margin-bottom: 15px;">Themes & Backgrounds</h3>
             <div class="themes-grid">
@@ -67,22 +70,37 @@
             <div class="stickers-section">
                 <h3 style="color: white; margin-bottom: 15px;">Add Stickers</h3>
                 <div class="stickers-grid">
-                    <button class="sticker-btn" onclick="addSticker('❤️')">❤️</button>
-                    <button class="sticker-btn" onclick="addSticker('⭐')">⭐</button>
-                    <button class="sticker-btn" onclick="addSticker('✨')">✨</button>
-                    <button class="sticker-btn" onclick="addSticker('🎉')">🎉</button>
-                    <button class="sticker-btn" onclick="addSticker('🎊')">🎊</button>
-                    <button class="sticker-btn" onclick="addSticker('💫')">💫</button>
-                    <button class="sticker-btn" onclick="addSticker('🌟')">🌟</button>
-                    <button class="sticker-btn" onclick="addSticker('💖')">💖</button>
-                    <button class="sticker-btn" onclick="addSticker('🦄')">🦄</button>
-                    <button class="sticker-btn" onclick="addSticker('🌈')">🌈</button>
-                    <button class="sticker-btn" onclick="addSticker('😊')">😊</button>
-                    <button class="sticker-btn" onclick="addSticker('😍')">😍</button>
-                    <button class="sticker-btn" onclick="addSticker('🔥')">🔥</button>
-                    <button class="sticker-btn" onclick="addSticker('💯')">💯</button>
-                    <button class="sticker-btn" onclick="addSticker('👑')">👑</button>
-                    <button class="sticker-btn" onclick="addSticker('🎈')">🎈</button>
+                      <button class="sticker-btn" onclick="addImageSticker('../assets/heart.png')">
+    <img src="../assets/heart.png" alt="Heart" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/cat.png')">
+    <img src="../assets/cat.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/dog.png')">
+    <img src="../assets/dog.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/sparkle.jpg')">
+    <img src="../assets/sparkle.jpg" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/ribbon.jpg')">
+    <img src="../assets/ribbon.jpg" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/kissy.png')">
+    <img src="../assets/kissy.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/pearl.png')">
+    <img src="../assets/pearl.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/hk.png')">
+    <img src="../assets/hk.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/bunny.png')">
+    <img src="../assets/bunny.png" alt="Star" class="sticker-icon">
+  </button>
+  <button class="sticker-btn" onclick="addImageSticker('../assets/cutecat.png')">
+    <img src="../assets/cutecat.png" alt="Star" class="sticker-icon">
+  </button>
+
                 </div>
             </div>
 

@@ -137,6 +137,42 @@ html {
   width: 25%;
   height: 85vh;
 }
+.frame-container {
+  position: relative;
+  width: 400px;
+  height: 600px;
+}
+
+.frame-container img {
+  width: 10%;
+  display: block;
+}
+
+.draggable-sticker {
+  position: absolute;
+  width: 60px;
+  cursor: move;
+  user-select: none;
+}
+
+.sticker-icon {
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.sticker-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.sticker-btn:hover {
+  transform: scale(1.2);
+}
+
 #capture .gallery-section .gallery-container {
   background: rgba(255, 255, 255, 0.25);
   -webkit-backdrop-filter: blur(20px);
