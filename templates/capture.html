@@ -9,7 +9,6 @@
 </head>
 <body id="capture">
   <div class="webcam-container">
-    <!-- Filters Section -->
     <section class="filters">
       <div class="container">
         <div class="filter-panel">
@@ -50,15 +49,31 @@
               <div class="filter-icon">🌈</div>
               <span class="filter-label">Retro</span>
             </button>
-          </div>
-          
+    <button class="filter-button" data-filter="cyber" onclick="setFilter('brightness(1.15) contrast(1.1) saturate(1.2) blur(0.3px)')">
+    <div class="filter-icon">🔥</div>
+    <span class="filter-label">Glow</span>
+  </button>
+  <button class="filter-button" data-filter="warm" onclick="setFilter('sepia(0.4) brightness(1.1) saturate(1.2)')">
+    <div class="filter-icon">💖</div>
+    <span class="filter-label">Warm</span>
+  </button>
+
+  <button class="filter-button" data-filter="cyber" onclick="setFilter('contrast(1.8) saturate(0.5) hue-rotate(360deg)')">
+    <div class="filter-icon">🧬</div>
+    <span class="filter-label">Cyber</span>
+  </button>
+
+
+        </div>
+  
           <div class="active-filter">
             <span class="active-label">Active Filter:</span>
             <div class="active-filter-info">
               <span class="active-icon">☀️</span>
               <span class="active-name">Original</span>
             </div>
-          </div>
+  
+        </div>
         </div>
       </div>
     </section>
@@ -69,12 +84,12 @@
     <!-- Webcam Capture Section -->
     <section class="camcapture">
       <video id="webcam" autoplay playsinline></video>
-      <button class="capture-btn" onclick="clickPic()" id="captureBtn"> 
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EC68A6"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
-        <span id="captureText">Capture Photo</span>
-      </button>
+    <button class="capture-btn" onclick="clickPic()" id="captureBtn"> 
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EC68A6"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
+      <span id="captureText">Capture Photo</span>
+    </button>
     </section>
-    
+
     <!-- Gallery Section -->
     <section class="gallery-section">
       <div class="gallery-container">
@@ -95,7 +110,7 @@
     </section>
   </div>
   <canvas id="canvas"></canvas>
-  
+
   <script src="../static/js/script.js"></script>
   <script>
     // Add filter button click handler
@@ -103,19 +118,19 @@
       const filterButtons = document.querySelectorAll('.filter-button');
       const activeIcon = document.querySelector('.active-icon');
       const activeName = document.querySelector('.active-name');
-      
+
       filterButtons.forEach(button => {
         button.addEventListener('click', function() {
           // Remove active class from all buttons
           filterButtons.forEach(btn => btn.classList.remove('active'));
-          
+
           // Add active class to clicked button
           this.classList.add('active');
-          
+
           // Update active filter display
           const icon = this.querySelector('.filter-icon').textContent;
           const label = this.querySelector('.filter-label').textContent;
-          
+
           activeIcon.textContent = icon;
           activeName.textContent = label;
         });
