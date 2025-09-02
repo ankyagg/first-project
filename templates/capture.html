@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webcam Capture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy@1.1.1/dist/webcam-easy.min.js"></script>
     <link rel="stylesheet" href="../static/style(a).css">
 </head>
@@ -16,9 +19,9 @@
             <div class="title-container">
               <h2 class="title">Choose a Filter</h2>
             </div>
-            <p class="subtitle">Transform your photo with amazing effects</p>
+            <p class="subtitle"></p>
           </div>
-          
+
           <div class="filter-grid">
             <button class="filter-button active" data-filter="original" onclick="setFilter('none')">
               <div class="filter-icon">☀️</div>
@@ -65,14 +68,14 @@
 
 
         </div>
-  
+
           <div class="active-filter">
             <span class="active-label">Active Filter:</span>
             <div class="active-filter-info">
               <span class="active-icon">☀️</span>
               <span class="active-name">Original</span>
             </div>
-  
+
         </div>
         </div>
       </div>
@@ -80,11 +83,11 @@
 
     <!-- Background decorative element -->
     <section class="bg"></section>
-    
+
     <!-- Webcam Capture Section -->
     <section class="camcapture">
       <video id="webcam" autoplay playsinline></video>
-    <button class="capture-btn" onclick="clickPic()" id="captureBtn"> 
+    <button class="capture-btn" onclick="clickPic()" id="captureBtn">
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EC68A6"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
       <span id="captureText">Capture Photo</span>
     </button>

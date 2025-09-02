@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Photo Strip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/style(a).css">
     <script src="../static/js/edit.js"></script>
     <style>
@@ -13,13 +16,13 @@
 <body id="edit">
     <div class="edit-container">
         <div class="left-panel">
-            <h2 class="panel-title">📸 Your Photo Strip</h2>
+            <h2 class="panel-title"></h2>
             <div id="frameContainer" class="frame-container">
                 <canvas id="photoStripCanvas" width="700" height="2100"></canvas>
             </div>
             <div class="canvas-info">
-                <p>Photo strip loaded from capture session</p>
-                <p>Ready for theme and sticker customization</p>
+                <p></p>
+                <p></p>
             </div>
             <div class="action-buttons">
                 <button class="action-btn download-btn" onclick="downloadFinalStrip()">💾 Download</button>
@@ -27,80 +30,149 @@
             </div>
         </div>
 
-        <!-- Right Panel - Themes and Stickers -->
+        <!-- Right Panel - Customization Options -->
         <div class="right-panel">
-            <h2 class="panel-title">🎨 Customize Your Strip</h2>
 
-            <!-- Themes Section -->
-            <h3 style="color: white; margin-bottom: 15px;">Themes & Backgrounds</h3>
-            <div class="themes-grid">
-                <div class="theme-card" onclick="applyTheme('classic')">
-                    <div class="theme-icon">🤍</div>
-                    <div class="theme-label">Classic</div>
-                    <div class="theme-desc">Clean white background</div>
+            <!-- Themes & Backgrounds Section -->
+            <div class="themes-section">
+                <div class="section-header">
+                    <h3 class="section-title"></h3>Themes & Backgrounds</h3>
+                    <p class="section-description">Choose a theme to transform your photo strip</p>
                 </div>
-                <div class="theme-card" onclick="applyTheme('vintage')">
-                    <div class="theme-icon">📸</div>
-                    <div class="theme-label">Vintage</div>
-                    <div class="theme-desc">Retro photo booth style</div>
-                </div>
-                <div class="theme-card" onclick="applyTheme('party')">
-                    <div class="theme-icon">🎉</div>
-                    <div class="theme-label">Party</div>
-                    <div class="theme-desc">Colorful celebration theme</div>
-                </div>
-                <div class="theme-card" onclick="applyTheme('summer')">
-                    <div class="theme-icon">🌴</div>
-                    <div class="theme-label">Summer</div>
-                    <div class="theme-desc">Beach vibes background</div>
-                </div>
-                <div class="theme-card" onclick="applyTheme('hearts')">
-                    <div class="theme-icon">💕</div>
-                    <div class="theme-label">Love</div>
-                    <div class="theme-desc">Romantic pink theme</div>
-                </div>
-                <div class="theme-card" onclick="applyTheme('space')">
-                    <div class="theme-icon">🌟</div>
-                    <div class="theme-label">Space</div>
-                    <div class="theme-desc">Galaxy background</div>
+                <div class="themes-grid">
+                    <div class="theme-card" onclick="applyTheme('classic')">
+                        <div class="theme-icon">🤍</div>
+                        <div class="theme-label">Classic</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('vintage')">
+                        <div class="theme-icon">📸</div>
+                        <div class="theme-label">Vintage</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('party')">
+                        <div class="theme-icon">🎉</div>
+                        <div class="theme-label">Party</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('summer')">
+                        <div class="theme-icon">🌴</div>
+                        <div class="theme-label">Summer</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('hearts')">
+                        <div class="theme-icon">💕</div>
+                        <div class="theme-label">Love</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('space')">
+                        <div class="theme-icon">🌟</div>
+                        <div class="theme-label">Space</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('neon')">
+                        <div class="theme-icon">💫</div>
+                        <div class="theme-label">Neon</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('autumn')">
+                        <div class="theme-icon">🍂</div>
+                        <div class="theme-label">Autumn</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('winter')">
+                        <div class="theme-icon">❄️</div>
+                        <div class="theme-label">Winter</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('spring')">
+                        <div class="theme-icon">🌸</div>
+                        <div class="theme-label">Spring</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('ocean')">
+                        <div class="theme-icon">🌊</div>
+                        <div class="theme-label">Ocean</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('sunset')">
+                        <div class="theme-icon">🌅</div>
+                        <div class="theme-label">Sunset</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('forest')">
+                        <div class="theme-icon">🌲</div>
+                        <div class="theme-label">Forest</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('midnight')">
+                        <div class="theme-icon">🌙</div>
+                        <div class="theme-label">Midnight</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('rainbow')">
+                        <div class="theme-icon">🌈</div>
+                        <div class="theme-label">Rainbow</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('minimalist')">
+                        <div class="theme-icon">⚪</div>
+                        <div class="theme-label">Minimalist</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('pastel')">
+                        <div class="theme-icon">🎨</div>
+                        <div class="theme-label">Pastel</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('gradient')">
+                        <div class="theme-icon">🔮</div>
+                        <div class="theme-label">Gradient</div>
+
+                    </div>
                 </div>
             </div>
 
+            <!-- Divider -->
+            <div class="section-divider"></div>
+
             <!-- Stickers Section -->
             <div class="stickers-section">
-                <h3 style="color: white; margin-bottom: 15px;">Add Stickers</h3>
+                <div class="section-header">
+                    <h3 class="section-title">Add Stickers</h3>
+                    <p class="section-description">Click stickers to add fun decorations to your strip</p>
+                </div>
                 <div class="stickers-grid">
-                      <button class="sticker-btn" onclick="addImageSticker('../assets/heart.png')">
-    <img src="../assets/heart.png" alt="Heart" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/cat.png')">
-    <img src="../assets/cat.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/dog.png')">
-    <img src="../assets/dog.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/sparkle.jpg')">
-    <img src="../assets/sparkle.jpg" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/ribbon.jpg')">
-    <img src="../assets/ribbon.jpg" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/kissy.png')">
-    <img src="../assets/kissy.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/pearl.png')">
-    <img src="../assets/pearl.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/hk.png')">
-    <img src="../assets/hk.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/bunny.png')">
-    <img src="../assets/bunny.png" alt="Star" class="sticker-icon">
-  </button>
-  <button class="sticker-btn" onclick="addImageSticker('../assets/cutecat.png')">
-    <img src="../assets/cutecat.png" alt="Star" class="sticker-icon">
-  </button>
-
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/heart.png')" title="Heart">
+                        <img src="../assets/heart.png" alt="Heart" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/cat.png')" title="Cat">
+                        <img src="../assets/cat.png" alt="Cat" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/dog.png')" title="Dog">
+                        <img src="../assets/dog.png" alt="Dog" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/sparkle.jpg')" title="Sparkle">
+                        <img src="../assets/sparkle.jpg" alt="Sparkle" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/ribbon.jpg')" title="Ribbon">
+                        <img src="../assets/ribbon.jpg" alt="Ribbon" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/kissy.png')" title="Kiss">
+                        <img src="../assets/kissy.png" alt="Kiss" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/pearl.png')" title="Pearl">
+                        <img src="../assets/pearl.png" alt="Pearl" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/hk.png')" title="Hello Kitty">
+                        <img src="../assets/hk.png" alt="Hello Kitty" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/bunny.png')" title="Bunny">
+                        <img src="../assets/bunny.png" alt="Bunny" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/cutecat.png')" title="Cute Cat">
+                        <img src="../assets/cutecat.png" alt="Cute Cat" class="sticker-icon">
+                    </button>
                 </div>
             </div>
 

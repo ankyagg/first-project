@@ -53,6 +53,28 @@
   font-family: "Outfit", sans-serif;
 }
 
+/* Serif fonts for edit and capture pages */
+#edit *, #capture * {
+  font-family: "Times New Roman", "Georgia", "Playfair Display", "Crimson Text", serif !important;
+  font-weight: normal !important;
+}
+
+/* Black color for main content text on edit and capture pages */
+#edit .panel-title,
+#edit .canvas-info,
+#edit .section-title,
+#edit .section-description,
+#edit .theme-label,
+#edit .theme-desc,
+#capture .line1,
+#capture .gallery-title,
+#capture .gallery-placeholder p,
+#capture .filters .title,
+#capture .filters .subtitle,
+#capture .filters .filter-label {
+  color: #000000 !important;
+}
+
 html {
   height: 100%;
   width: 100%;
@@ -80,7 +102,7 @@ html {
   display: flex;
 }
 #capture .webcam-container .bg {
-  width: 41%;
+  width: 40%;
   background: rgba(0, 150, 255, 0.2);
   mix-blend-mode: screen;
   border: 1px solid #F6D0DA;
@@ -93,33 +115,36 @@ html {
   z-index: 1;
 }
 #capture .webcam-container .camcapture {
-  width: 62%;
+  width: 50%;
   height: 85vh;
   position: absolute;
   top: 0%;
-  left: 19%;
+  left: 25%;
   z-index: 2;
 }
 #capture .webcam-container #webcam {
   position: absolute;
-  top: 44%;
-  left: 49%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) !important;
-  width: 35em;
-  height: 30em;
+  width: 85%;
+  max-width: 32em;
+  height: 65%;
+  max-height: 24em;
   border-radius: 20px;
   background-color: black;
   z-index: 1000;
   margin: 0 auto;
   display: block;
+  object-fit: cover;
 }
 #capture .webcam-container .capture-btn {
   position: absolute;
   top: 89%;
-  left: 47%;
+  left: 50%;
   transform: translateX(-50%);
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 25px;
   color: #EC68A6;
   background-color: #F8E0E6;
@@ -129,7 +154,8 @@ html {
   align-items: center;
   gap: 15%;
   font-size: 16px;
-  width: 30%;
+  width: 35%;
+  min-width: 200px;
   z-index: 1001;
 }
 #capture .webcam-container .capture-btn svg {
@@ -264,20 +290,21 @@ html {
 }
 #capture .filters .container {
   width: 100%;
-  max-width: 320px;
+  max-width: 450px;
 }
 #capture .filters .filter-panel {
   position: relative;
-  left: 20%;
+  left: 5%;
   background: rgba(255, 255, 255, 0.25);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 24px;
-  padding: 24px;
+  padding: 32px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   transition: all 0.3s ease;
   animation: glow 3s ease-in-out infinite;
+  min-width: 400px;
 }
 #capture .filters .filter-panel:hover {
   background: rgba(255, 255, 255, 0.3);
@@ -303,7 +330,7 @@ html {
 }
 #capture .filters .title {
   color: white;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   letter-spacing: -0.5px;
@@ -317,25 +344,26 @@ html {
 }
 #capture .filters .filter-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
   margin-bottom: 24px;
 }
 #capture .filters .filter-button {
   background: rgba(255, 255, 255, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 16px;
-  padding: 20px 16px;
+  padding: 24px 18px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  min-height: 90px;
 }
 #capture .filters .filter-button::before {
   content: "";
@@ -605,12 +633,12 @@ html {
   padding: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 #edit .edit-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
@@ -716,31 +744,59 @@ html {
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
 }
+/* Section Structure */
+#edit .themes-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
 #edit .stickers-section {
-  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#edit .section-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#edit .section-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#edit .section-description {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.4;
+}
+
+#edit .section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  margin: 30px 0;
+  border-radius: 1px;
 }
 #edit .stickers-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin-top: 15px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-#edit .stickers-grid::-webkit-scrollbar {
-  width: 6px;
-}
-#edit .stickers-grid::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-#edit .stickers-grid::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-}
-#edit .stickers-grid::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
 }
 #edit .sticker-btn {
   background: rgba(255, 255, 255, 0.2);
@@ -838,6 +894,24 @@ html {
     font-size: 20px;
     margin-bottom: 15px;
   }
+  #edit .themes-section,
+  #edit .stickers-section {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  #edit .section-header {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  #edit .section-title {
+    font-size: 18px;
+  }
+  #edit .section-description {
+    font-size: 12px;
+  }
+  #edit .section-divider {
+    margin: 20px 0;
+  }
   #edit .themes-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -860,7 +934,6 @@ html {
   #edit .stickers-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    max-height: 250px;
   }
   #edit .sticker-btn {
     padding: 8px;
@@ -924,7 +997,6 @@ html {
   #edit .stickers-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    max-height: 200px;
   }
   #edit .sticker-btn {
     padding: 6px;

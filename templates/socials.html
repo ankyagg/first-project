@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socials - Photobooth</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+        .hero {
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .socials-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+        }
+        
+        .socials-title {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .socials-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .socials-title {
+                font-size: 3rem;
+            }
+            
+            .socials-subtitle {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="hero">
+        <canvas id="canvas"></canvas>
+        
+        <div class="socials-container">
+            <h1 class="socials-title">Connect With Us</h1>
+            <p class="socials-subtitle">Follow us on social media for updates, behind-the-scenes content, and more memories!</p>
+            
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

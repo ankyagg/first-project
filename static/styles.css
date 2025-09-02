@@ -40,7 +40,7 @@ h1{
   white-space: nowrap;
   border-right: 3px solid rgba(255,255,255,0.75); /* blinking cursor */
   width: 0;
-  animation: typing 8s steps(40,end) infinite, blink 0.7s step-end infinite;
+  animation: typing 10s steps(40,end) infinite, blink 0.7s step-end infinite;
 }
 
 @keyframes typing {
