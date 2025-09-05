@@ -29,7 +29,8 @@
             font-family: 'Outfit', sans-serif;
             height: 100vh;
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
         }
 
@@ -193,8 +194,8 @@
 
         /* Action Buttons */
         .action-section {
-            position: absolute;
-            bottom: 20px; /* Reduced bottom spacing */
+            position: fixed;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -203,9 +204,33 @@
             justify-content: center;
             width: 90%;
             max-width: 400px;
-            gap: 15px; /* Reduced gap */
+            z-index: 1000;
             opacity: 0;
-            animation: fadeInUp 1s ease-out 8s both; /* Delayed to match longer printing */
+            animation: fadeInUp 1s ease-out 8s both;
+        }
+
+        /* Emergency access button - always visible */
+        .emergency-retake {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #e91e63;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .emergency-retake:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
         }
 
         .action-btn {
@@ -263,7 +288,6 @@
             }
         }
 
-        /* Strip Emerges ONLY From Below Printer Area */
         @keyframes emergeFromBelowPrinter {
             0% {
                 transform: translateX(-50%) translateY(-100%); /* Hidden below printer area */
@@ -456,22 +480,29 @@
             .action-section {
                 bottom: 5px;
             }
+
+            .emergency-retake {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
         }
 
         /* Touch Device Optimizations */
         @media (hover: none) and (pointer: coarse) {
-            .action-btn {
+            .action-btn, .emergency-retake {
                 min-height: 48px;
                 min-width: 48px;
+            }
 
-                &:hover {
-                    transform: none;
-                }
+            .action-btn:hover, .emergency-retake:hover {
+                transform: none;
+            }
 
-                &:active {
-                    transform: scale(0.95);
-                    transition: transform 0.1s ease;
-                }
+            .action-btn:active, .emergency-retake:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
             }
         }
 
@@ -492,7 +523,6 @@
             <p class="subtitle">printing your memories...</p>
         </div>
 
-        <!-- PRINTER AT THE TOP -->
         <div class="printer-machine">
             <div class="printer-display">
                 <div class="printer-brand">📸 photobooth</div>
@@ -504,7 +534,6 @@
             </div>
         </div>
 
-        <!-- EDITED PHOTO STRIP COMING OUT FROM BELOW PRINTER -->
         <div class="photos-output">
             <div class="edited-strip" id="editedStrip">
                 <div class="strip-header">
@@ -519,16 +548,16 @@
                 </div>
             </div>
         </div>
+        <!-- Emergency Retake Button (always accessible) -->
+        <button class="emergency-retake" onclick="goHome()" title="Return to capture">
+            ↺ Retake
+        </button>
+
         <!-- Action Buttons -->
         <div class="action-section">
-            <button class="action-btn primary-btn" onclick="downloadPhotos()">
-                💾 Download
+            <button class="action-btn primary-btn" onclick="goHome()">
+                Retake
             </button>
-            <button class="action-btn secondary-btn" onclick="goHome()">
-    📸 New Photos
-</button>
-
-
         </div>
     </div>
 

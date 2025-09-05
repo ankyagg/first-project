@@ -52,35 +52,6 @@
   box-sizing: border-box;
   font-family: "Outfit", sans-serif;
 }
-#capture {
-  height: 100vh;
-  width: 100vw;
-  padding-top: 4%;
-  background: url(../templates/Home.jpg) center/cover no-repeat fixed;
-}
-
-
-/* Serif fonts for edit and capture pages */
-#edit *, #capture * {
-  font-family: "Times New Roman", "Georgia", "Playfair Display", "Crimson Text", serif !important;
-  font-weight: normal !important;
-}
-
-/* Black color for main content text on edit and capture pages */
-#edit .panel-title,
-#edit .canvas-info,
-#edit .section-title,
-#edit .section-description,
-#edit .theme-label,
-#edit .theme-desc,
-#capture .line1,
-#capture .gallery-title,
-#capture .gallery-placeholder p,
-#capture .filters .title,
-#capture .filters .subtitle,
-#capture .filters .filter-label {
-  color: #000000 !important;
-}
 
 html {
   height: 100%;
@@ -109,7 +80,7 @@ html {
   display: flex;
 }
 #capture .webcam-container .bg {
-  width: 40%;
+  width: 41%;
   background: rgba(0, 150, 255, 0.2);
   mix-blend-mode: screen;
   border: 1px solid #F6D0DA;
@@ -122,36 +93,33 @@ html {
   z-index: 1;
 }
 #capture .webcam-container .camcapture {
-  width: 50%;
+  width: 62%;
   height: 85vh;
   position: absolute;
   top: 0%;
-  left: 25%;
+  left: 19%;
   z-index: 2;
 }
 #capture .webcam-container #webcam {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 44%;
+  left: 49%;
   transform: translate(-50%, -50%) !important;
-  width: 85%;
-  max-width: 32em;
-  height: 65%;
-  max-height: 24em;
+  width: 35em;
+  height: 30em;
   border-radius: 20px;
   background-color: black;
   z-index: 1000;
   margin: 0 auto;
   display: block;
-  object-fit: cover;
 }
 #capture .webcam-container .capture-btn {
   position: absolute;
   top: 89%;
-  left: 50%;
+  left: 47%;
   transform: translateX(-50%);
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 25px;
   color: #EC68A6;
   background-color: #F8E0E6;
@@ -161,8 +129,7 @@ html {
   align-items: center;
   gap: 15%;
   font-size: 16px;
-  width: 35%;
-  min-width: 200px;
+  width: 30%;
   z-index: 1001;
 }
 #capture .webcam-container .capture-btn svg {
@@ -297,21 +264,21 @@ html {
 }
 #capture .filters .container {
   width: 100%;
-  max-width: 450px;
+  max-width: 320px;
 }
 #capture .filters .filter-panel {
-  position: relative;
-  left: 5%;
+  width: 25em;
+  height: 43em;
+  margin: 0 0px 0 2em;
   background: rgba(255, 255, 255, 0.25);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 24px;
-  padding: 32px;
+  padding: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   transition: all 0.3s ease;
   animation: glow 3s ease-in-out infinite;
-  min-width: 400px;
 }
 #capture .filters .filter-panel:hover {
   background: rgba(255, 255, 255, 0.3);
@@ -337,7 +304,7 @@ html {
 }
 #capture .filters .title {
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   letter-spacing: -0.5px;
@@ -351,26 +318,25 @@ html {
 }
 #capture .filters .filter-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
   margin-bottom: 24px;
 }
 #capture .filters .filter-button {
   background: rgba(255, 255, 255, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 16px;
-  padding: 24px 18px;
+  padding: 20px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  min-height: 90px;
 }
 #capture .filters .filter-button::before {
   content: "";
@@ -492,12 +458,13 @@ html {
   }
   #capture .webcam-container .camcapture {
     width: 90% !important;
+    max-width: 350px !important;
     height: auto !important;
     position: relative !important;
     left: 0 !important;
     top: 0 !important;
     order: 2 !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -563,37 +530,71 @@ html {
     position: relative !important;
     width: 90% !important;
     margin: 20px auto !important;
-    left: 0 !important;
+    left: 45% !important;
+    transform: translateX(-50%) !important;
     order: 1 !important;
   }
   #capture .filters .container {
     max-width: 100% !important;
   }
   #capture .filters .filter-panel {
-    left: 0 !important;
-    padding: 16px !important;
-    margin: 0 !important;
+    max-width: 350px;
+    padding: -500px !important;
+    height: 28em;
   }
   #capture .filters .filter-panel .title {
-    font-size: 20px !important;
+    font-size: 22px;
   }
   #capture .filters .filter-panel .subtitle {
-    font-size: 12px !important;
+    font-size: 13px;
   }
   #capture .filters .filter-panel .filter-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
   }
   #capture .filters .filter-panel .filter-button {
-    padding: 12px 8px !important;
-    min-height: 80px !important;
+    padding: 16px 12px;
+    min-height: 85px;
   }
   #capture .filters .filter-panel .filter-button .filter-icon {
-    font-size: 24px !important;
+    font-size: 26px;
   }
   #capture .filters .filter-panel .filter-button .filter-label {
-    font-size: 11px !important;
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  #capture .filters {
+    width: 95%;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  #capture .filters .filter-panel {
+    max-width: 320px;
+    padding: 18px;
+    margin: 0 auto;
+  }
+  #capture .filters .filter-panel .filter-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  #capture .filters .filter-panel .filter-button {
+    padding: 14px 10px;
+    min-height: 80px;
+  }
+  #capture .filters .filter-panel .filter-button .filter-icon {
+    font-size: 22px;
+  }
+  #capture .filters .filter-panel .filter-button .filter-label {
+    font-size: 10px;
+  }
+  #capture .webcam-container .camcapture {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  #capture .webcam-container #webcam {
+    max-width: 320px;
   }
 }
 @media (max-width: 480px) {
@@ -604,7 +605,7 @@ html {
     width: 95%;
   }
   #capture .webcam-container #webcam {
-    max-width: 300px;
+    max-width: 400px;
   }
   #capture .webcam-container .capture-btn {
     width: 70%;
@@ -622,20 +623,56 @@ html {
   }
   #capture .filters {
     width: 95%;
+    padding: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  #capture .filters .container {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    justify-content: center;
   }
   #capture .filters .filter-panel {
-    padding: 12px;
+    max-width: none;
+    padding: 16px;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
+  #capture .filters .filter-panel .title {
+    font-size: 18px;
+  }
+  #capture .filters .filter-panel .subtitle {
+    font-size: 12px;
   }
   #capture .filters .filter-panel .filter-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
   }
-}
-#frameContainer {
-  position: relative;
-  width: 100%;
-  max-width: 400px; /* optional max width */
-  margin: 0 auto;
-  height: auto; /* or set a min-height */
+  #capture .filters .filter-panel .filter-button {
+    padding: 12px 8px;
+    min-height: 75px;
+    border-radius: 12px;
+  }
+  #capture .filters .filter-panel .filter-button .filter-icon {
+    font-size: 20px;
+  }
+  #capture .filters .filter-panel .filter-button .filter-label {
+    font-size: 10px;
+    font-weight: 500;
+  }
+  #capture .filters .filter-panel .active-filter {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  #capture .filters .filter-panel .active-filter .active-label {
+    font-size: 11px;
+  }
+  #capture .filters .filter-panel .active-filter .active-name {
+    font-size: 12px;
+  }
 }
 #edit {
   background-image: url(../templates/Home.jpg);
@@ -647,12 +684,12 @@ html {
   padding: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: Arial, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 #edit .edit-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
@@ -675,7 +712,6 @@ html {
           backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 20px;
-  overflow-y: auto;
 }
 #edit .panel-title {
   color: white;
@@ -702,13 +738,11 @@ html {
   max-height: 90vh;
   display: block;
   margin: 0 auto;
-  aspect-ratio: 1/3;
+  aspect-ratio: 2/5;
   width: 400px;
-  height: 1200px;
+  height: 1000px;
 }
 #edit .draggable-sticker {
-  cursor: grab;
-  max-width: 80px;
   position: absolute;
   width: 50px;
   height: 50px;
@@ -760,59 +794,15 @@ html {
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
 }
-/* Section Structure */
-#edit .themes-section {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 25px;
-  margin-bottom: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
 #edit .stickers-section {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 25px;
-  margin-bottom: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-#edit .section-header {
-  text-align: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#edit .section-title {
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-#edit .section-description {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
-  font-weight: 300;
-  margin: 0;
-  line-height: 1.4;
-}
-
-#edit .section-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  margin: 30px 0;
-  border-radius: 1px;
+  margin-top: 30px;
 }
 #edit .stickers-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin-top: 15px;
+  padding-right: 8px;
 }
 #edit .sticker-btn {
   background: rgba(255, 255, 255, 0.2);
@@ -883,21 +873,17 @@ html {
   #edit .left-panel {
     flex: none;
     order: 2;
-    padding: 15px;
+    padding: 10px;
     background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   #edit .left-panel #photoStripCanvas {
-    max-width: 380px;
-    max-height: 85vh;
-    width: 380px;
-    height: 1300px;
-    aspect-ratio: 1/3.42;
+    max-width: 350px;
+    max-height: 80vh;
+    width: 350px;
+    height: 875px;
+    aspect-ratio: 2/5;
     border: none;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    box-shadow: none;
   }
   #edit .right-panel {
     flex: none;
@@ -909,24 +895,6 @@ html {
   #edit .panel-title {
     font-size: 20px;
     margin-bottom: 15px;
-  }
-  #edit .themes-section,
-  #edit .stickers-section {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  #edit .section-header {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-  }
-  #edit .section-title {
-    font-size: 18px;
-  }
-  #edit .section-description {
-    font-size: 12px;
-  }
-  #edit .section-divider {
-    margin: 20px 0;
   }
   #edit .themes-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -950,6 +918,7 @@ html {
   #edit .stickers-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    max-height: 250px;
   }
   #edit .sticker-btn {
     padding: 8px;
@@ -982,20 +951,16 @@ html {
   }
   #edit .left-panel {
     background: transparent;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 5px;
   }
   #edit .left-panel #photoStripCanvas {
-    max-width: 340px;
-    max-height: 80vh;
-    width: 340px;
-    height: 1160px;
-    aspect-ratio: 1/3.41;
+    max-width: 300px;
+    max-height: 75vh;
+    width: 300px;
+    height: 750px;
+    aspect-ratio: 2/5;
     border: none;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
+    box-shadow: none;
   }
   #edit .panel-title {
     font-size: 18px;
@@ -1013,6 +978,7 @@ html {
   #edit .stickers-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
+    max-height: 200px;
   }
   #edit .sticker-btn {
     padding: 6px;

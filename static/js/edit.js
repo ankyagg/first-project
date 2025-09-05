@@ -117,23 +117,19 @@ function makeDraggable(element) {
   });
 }
 
-
-
 function drawPhotoStrip() {
     const canvas = document.getElementById('photoStripCanvas');
     const ctx = canvas.getContext('2d');
 
 
     const photoCount = capturedPhotos.length;
-    const photoWidth = 320;
-    const photoHeight = 120;
+    const photoWidth = 280;
+    const photoHeight = 200;
     const spacing = 20;
     const padding = 40;
 
-
     canvas.width = 400;
     canvas.height = padding + (photoHeight * photoCount) + (spacing * (photoCount - 1)) + padding;
-
 
     applyThemeBackground(ctx);
 
@@ -556,15 +552,38 @@ async function downloadFinalStrip() {
     const frame = document.getElementById('frameContainer');
     const stickers = frame.querySelectorAll('.draggable-sticker');
 
+    // Get canvas and frame container positions for coordinate calculation
+    const canvasRect = canvas.getBoundingClientRect();
+    const frameRect = frame.getBoundingClientRect();
+    
+    // Calculate scale factors between displayed canvas and actual canvas dimensions
+    const scaleX = canvas.width / canvasRect.width;
+    const scaleY = canvas.height / canvasRect.height;
+
     const promises = Array.from(stickers).map(sticker => new Promise(resolve => {
         const img = new Image();
         img.src = sticker.src;
         img.onload = () => {
-            const canvasRect = canvas.getBoundingClientRect();
             const stickerRect = sticker.getBoundingClientRect();
-            const x = stickerRect.left - canvasRect.left;
-            const y = stickerRect.top - canvasRect.top;
-            ctx.drawImage(img, x, y, sticker.width, sticker.height);
+            
+            // Calculate position relative to frameContainer first
+            const frameRelativeX = stickerRect.left - frameRect.left;
+            const frameRelativeY = stickerRect.top - frameRect.top;
+            
+            // Then calculate relative to canvas within the frame
+            const canvasOffsetX = canvasRect.left - frameRect.left;
+            const canvasOffsetY = canvasRect.top - frameRect.top;
+            
+            const canvasRelativeX = frameRelativeX - canvasOffsetX;
+            const canvasRelativeY = frameRelativeY - canvasOffsetY;
+            
+            // Scale coordinates to match actual canvas dimensions
+            const x = canvasRelativeX * scaleX;
+            const y = canvasRelativeY * scaleY;
+            const width = sticker.width * scaleX;
+            const height = sticker.height * scaleY;
+            
+            ctx.drawImage(img, x, y, width, height);
             resolve();
         };
     }));
