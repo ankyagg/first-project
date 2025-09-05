@@ -70,7 +70,7 @@
             backdrop-filter: blur(20px);
             border-radius: 16px;
             padding: 20px 40px; /* Reduced padding for compact size */
-            box-shadow: 
+            box-shadow:
                 0 10px 30px rgba(0, 0, 0, 0.1),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
             margin-bottom: 15px;
@@ -138,11 +138,11 @@
         /* The Final Edited Photo Strip - HIDDEN UNTIL BELOW PRINTER */
         .edited-strip {
             width: 280px; /* Match printer slot width */
-            max-height: 60vh; 
+            max-height: 60vh;
             background: white;
             border-radius: 16px;
             padding: 16px;
-            box-shadow: 
+            box-shadow:
                 0 15px 35px rgba(0, 0, 0, 0.15),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -296,56 +296,56 @@
             .printer-container {
                 padding: 10px;
             }
-            
+
             .header {
                 margin: 10px 0;
             }
-            
+
             .title {
                 font-size: clamp(24px, 6vw, 36px);
             }
-            
+
             .subtitle {
                 font-size: 12px;
             }
-            
+
             .printer-machine {
                 padding: 15px 20px;
                 margin-bottom: 10px;
             }
-            
+
             .printer-brand {
                 font-size: 14px;
             }
-            
+
             .printer-status {
                 font-size: 11px;
             }
-            
+
             .printer-slot {
                 width: 240px;
                 height: 14px;
             }
-            
+
             .edited-strip {
                 width: 240px;
                 padding: 12px;
                 top: 40px;
             }
-            
+
             .strip-content {
                 max-height: 40vh;
             }
-            
+
             .strip-content img {
                 max-height: 40vh;
             }
-            
+
             .action-section {
                 bottom: 15px;
                 gap: 10px;
             }
-            
+
             .action-btn {
                 padding: 10px 16px;
                 font-size: 12px;
@@ -358,57 +358,57 @@
             .printer-container {
                 padding: 5px;
             }
-            
+
             .header {
                 margin: 5px 0;
             }
-            
+
             .title {
                 font-size: clamp(20px, 5vw, 28px);
             }
-            
+
             .subtitle {
                 font-size: 11px;
             }
-            
+
             .printer-machine {
                 padding: 12px 16px;
                 margin-bottom: 8px;
             }
-            
+
             .printer-brand {
                 font-size: 12px;
             }
-            
+
             .printer-status {
                 font-size: 10px;
             }
-            
+
             .printer-slot {
                 width: 200px;
                 height: 12px;
             }
-            
+
             .edited-strip {
                 width: 200px;
                 padding: 10px;
                 top: 30px;
             }
-            
+
             .strip-content {
                 max-height: 35vh;
             }
-            
+
             .strip-content img {
                 max-height: 35vh;
             }
-            
+
             .action-section {
                 bottom: 10px;
                 gap: 8px;
                 width: 95%;
             }
-            
+
             .action-btn {
                 padding: 8px 12px;
                 font-size: 11px;
@@ -416,65 +416,65 @@
                 min-height: 40px;
             }
         }
-        
+
         /* Landscape Mobile Optimization */
         @media (max-width: 768px) and (orientation: landscape) {
             .printer-container {
                 padding: 5px;
             }
-            
+
             .header {
                 margin: 5px 0;
             }
-            
+
             .title {
                 font-size: clamp(18px, 4vw, 24px);
             }
-            
+
             .subtitle {
                 font-size: 10px;
             }
-            
+
             .printer-machine {
                 padding: 10px 15px;
                 margin-bottom: 5px;
             }
-            
+
             .edited-strip {
                 top: 25px;
                 max-height: 50vh;
             }
-            
+
             .strip-content {
                 max-height: 45vh;
             }
-            
+
             .strip-content img {
                 max-height: 45vh;
             }
-            
+
             .action-section {
                 bottom: 5px;
             }
         }
-        
+
         /* Touch Device Optimizations */
         @media (hover: none) and (pointer: coarse) {
             .action-btn {
                 min-height: 48px;
                 min-width: 48px;
-                
+
                 &:hover {
                     transform: none;
                 }
-                
+
                 &:active {
                     transform: scale(0.95);
                     transition: transform 0.1s ease;
                 }
             }
         }
-        
+
         /* High DPI Display Support */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
             .title, .subtitle, .printer-brand, .printer-status {
@@ -498,7 +498,7 @@
                 <div class="printer-brand">📸 photobooth</div>
                 <div class="printer-status" id="printerStatus">preparing to print...</div>
             </div>
-            
+
             <div class="printer-slot">
                 <div class="slot-opening"></div>
             </div>
@@ -519,15 +519,16 @@
                 </div>
             </div>
         </div>
-
         <!-- Action Buttons -->
         <div class="action-section">
             <button class="action-btn primary-btn" onclick="downloadPhotos()">
                 💾 Download
             </button>
             <button class="action-btn secondary-btn" onclick="goHome()">
-                📸 New Photos
-            </button>
+    📸 New Photos
+</button>
+
+
         </div>
     </div>
 
@@ -538,7 +539,7 @@
             const now = new Date();
             const dateString = now.toLocaleDateString();
             document.getElementById('stripDate').textContent = dateString;
-            
+
             // Status sequence for 5-second printing (1.5+ sec per photo)
             const statuses = [
                 'preparing to print...',
@@ -548,12 +549,12 @@
                 'finalizing...',
                 'strip complete! ✨'
             ];
-            
+
             const statusTiming = [1000, 2500, 4000, 5500, 6500, 7500];
-            
+
             let statusIndex = 0;
             const printerStatus = document.getElementById('printerStatus');
-            
+
             statusTiming.forEach((delay, index) => {
                 setTimeout(() => {
                     if (statusIndex < statuses.length) {
@@ -562,7 +563,7 @@
                     }
                 }, delay);
             });
-            
+
             // Load the edited canvas
             loadEditedStrip();
         });
@@ -579,7 +580,7 @@
                     display: block;
                     border-radius: 12px;
                 `;
-                
+
                 // Replace loading message
                 const stripContent = document.getElementById('stripContent');
                 stripContent.innerHTML = '';
@@ -610,12 +611,13 @@
             }
         }
 
-        function goHome() {
-            // Clear stored data and go back
-            localStorage.removeItem('capturedPhotos');
-            localStorage.removeItem('editedPhotoStrip');
-            window.location.href = 'capture.html';
-        }
+function goHome() {
+    localStorage.removeItem('capturedPhotos');
+    localStorage.removeItem('editedPhotoStrip');
+    window.location.href = 'capture.html';
+}
+
+
     </script>
 </body>
 </html>

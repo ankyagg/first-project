@@ -1,76 +1,118 @@
-/*.dark {
-  background-color: rgb(20, 20, 54);
-}*/
-body,html{
+/* Reset */
+body, html {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.hero{
+
+/* Dark mode background */
+body.dark {
+  background-color: rgb(20, 20, 54);
+  color: white;
+}
+
+/* Hero section */
+.hero {
   height: 100vh;
-  margin-top: 0;
+  margin: 0;
   background-image: url("../templates/Home.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
+  justify-content: center; /* vertical centering */
+  align-items: center;     /* horizontal centering */
+  text-align: center;
+  position: relative;
+  padding: 0 1rem;
+}
+
+/* Hero content wrapper */
+.hero-content {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-}
-h1{
-  font-size:100px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  animation: breathing 8s ease-in-out infinite;
-}
-@keyframes breathing {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-
-}
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid rgba(255,255,255,0.75); /* blinking cursor */
-  width: 0;
-  animation: typing 10s steps(40,end) infinite, blink 0.7s step-end infinite;
+  gap: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* perfectly center in the middle */
+  width: 100%;
 }
 
-@keyframes typing {
-    0% { width: 0 }
-  50% { width: 30% }
-  80%{ width: 30%}
-  100% { width: 0 }
+/* Canvas below hero content */
+#canvas {
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  position: relative; /* keeps it below hero-content */
+  z-index: 1;
 }
 
-@keyframes blink {
-  50% { border-color: transparent }
-}
-
-.nav{
+/* Navigation stays fixed */
+.nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 70%;
-  background: white;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 70%, 400px);
+  background: rgba(255,255,255,0.9);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   backdrop-filter: blur(10px);
+  border-radius: 30px;
   z-index: 1000;
-  margin-left: 250px;
-  margin-bottom: 50px;
-  border-radius: 40px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  flex-wrap: wrap;
 }
+
+
+
+/* Main heading */
+h1 {
+  font-size: clamp(40px, 8vw, 100px); /* scales with screen */
+  animation: breathing 8s ease-in-out infinite;
+  text-align: center;
+  color: white;
+}
+
+@keyframes breathing {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* Typewriter effect */
+.typewriter {
+  font-size: clamp(16px, 1.5vw, 32px);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid rgba(255,255,255,0.75);
+  width: 0;
+  animation: typing 10s steps(40,end) infinite, blink 0.7s step-end infinite;
+  max-width: 90%;
+  margin: 1rem auto 0 auto;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 90%; }
+  80% { width: 90%; }
+  100% { width: 0; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+
+
+
 .nav a {
   color: grey;
   text-decoration: none;
@@ -81,10 +123,38 @@ h1{
 
 .nav a:hover {
   color: palevioletred;
-  text-shadow: 0 0 18px palevioletred 0 0 20 palevioletred;
+  text-shadow: 0 0 18px palevioletred;
 }
-.dark h1 {
-  color: black;
+
+/* Dark mode heading color */
+body.dark h1 {
+  color: white;
   transition: color 0.3s, text-shadow 0.3s;
 }
 
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(40px, 12vw, 100px);
+  }
+  .typewriter {
+    font-size: clamp(14px, 2vw, 28px);
+  }
+  #canvas {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(30px, 14vw, 80px);
+  }
+  .typewriter {
+    font-size: clamp(12px, 3vw, 24px);
+  }
+  .nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+}

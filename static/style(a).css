@@ -52,6 +52,13 @@
   box-sizing: border-box;
   font-family: "Outfit", sans-serif;
 }
+#capture {
+  height: 100vh;
+  width: 100vw;
+  padding-top: 4%;
+  background: url(../templates/Home.jpg) center/cover no-repeat fixed;
+}
+
 
 /* Serif fonts for edit and capture pages */
 #edit *, #capture * {
@@ -623,6 +630,13 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+#frameContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* optional max width */
+  margin: 0 auto;
+  height: auto; /* or set a min-height */
+}
 #edit {
   background-image: url(../templates/Home.jpg);
   background-size: cover;
@@ -693,6 +707,8 @@ html {
   height: 1200px;
 }
 #edit .draggable-sticker {
+  cursor: grab;
+  max-width: 80px;
   position: absolute;
   width: 50px;
   height: 50px;

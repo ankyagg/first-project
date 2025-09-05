@@ -61,23 +61,62 @@ function addImageSticker(src) {
 }
 
 function makeDraggable(element) {
-  let offsetX, offsetY;
+  let startX, startY, origX, origY;
 
-  element.onmousedown = function (e) {
-    offsetX = e.clientX - element.offsetLeft;
-    offsetY = e.clientY - element.offsetTop;
+  const container = element.offsetParent; // make sure container is relative
 
-    document.onmousemove = function (e) {
-      element.style.left = e.clientX - offsetX + 'px';
-      element.style.top = e.clientY - offsetY + 'px';
-    };
+  function onMouseMove(e) {
+    const x = e.clientX - startX + origX;
+    const y = e.clientY - startY + origY;
+    element.style.left = x + 'px';
+    element.style.top = y + 'px';
+  }
 
-    document.onmouseup = function () {
-      document.onmousemove = null;
-      document.onmouseup = null;
-    };
-  };
+  function onTouchMove(e) {
+    const touch = e.touches[0];
+    const x = touch.clientX - startX + origX;
+    const y = touch.clientY - startY + origY;
+    element.style.left = x + 'px';
+    element.style.top = y + 'px';
+  }
+
+  function onEnd() {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener('touchend', onEnd);
+  }
+
+  element.addEventListener('mousedown', function (e) {
+    e.preventDefault();
+    const rect = element.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+
+    startX = e.clientX;
+    startY = e.clientY;
+    origX = rect.left - containerRect.left;
+    origY = rect.top - containerRect.top;
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onEnd);
+  });
+
+  element.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = element.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+
+    startX = touch.clientX;
+    startY = touch.clientY;
+    origX = rect.left - containerRect.left;
+    origY = rect.top - containerRect.top;
+
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchend', onEnd);
+  });
 }
+
 
 
 function drawPhotoStrip() {
