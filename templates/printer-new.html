@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📸 Printing Photos 📸</title>
+    <title>Adore Moments</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
     <style>
         @font-face {
             font-family: 'Outfit';
@@ -407,7 +408,11 @@
             .printer-status {
                 font-size: 10px;
             }
-
+            .emergency-retake{
+                position: absolute;
+                top:53em;
+                right:15em;
+            }
             .printer-slot {
                 width: 200px;
                 height: 12px;
@@ -482,14 +487,14 @@
             }
 
             .emergency-retake {
+                position: absolute;
                 top: 10px;
-                right: 10px;
+                right: 100px;
                 padding: 8px 12px;
                 font-size: 11px;
             }
         }
 
-        /* Touch Device Optimizations */
         @media (hover: none) and (pointer: coarse) {
             .action-btn, .emergency-retake {
                 min-height: 48px;
@@ -554,11 +559,7 @@
         </button>
 
         <!-- Action Buttons -->
-        <div class="action-section">
-            <button class="action-btn primary-btn" onclick="goHome()">
-                Retake
-            </button>
-        </div>
+        
     </div>
 
     <script>
