@@ -172,14 +172,13 @@ function applyThemeBackground(ctx) {
 
     switch (currentTheme) {
         case 'classic':
-            ctx.fillStyle = '#f8f9fa';
+            ctx.fillStyle = '#e6e6e6ff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             break;
 
         case 'vintage':
             ctx.fillStyle = '#f4f1e8';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add vintage texture
             ctx.fillStyle = 'rgba(139, 69, 19, 0.1)';
             for (let i = 0; i < 50; i++) {
                 const x = Math.random() * canvas.width;
@@ -188,250 +187,279 @@ function applyThemeBackground(ctx) {
             }
             break;
 
-        case 'party':
-            // Gradient background
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#ff6b9d');
-            gradient.addColorStop(0.5, '#c44569');
-            gradient.addColorStop(1, '#f8b500');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            break;
+        // ... all your other themes here ...
 
-        case 'summer':
-            const summerGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            summerGradient.addColorStop(0, '#87CEEB');
-            summerGradient.addColorStop(1, '#F0E68C');
-            ctx.fillStyle = summerGradient;
+        case 'filmstrip':
+            ctx.fillStyle = '#000000';  // black background
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            break;
 
-        case 'hearts':
-            ctx.fillStyle = '#ffe0e6';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add heart pattern
-            ctx.fillStyle = 'rgba(255, 182, 193, 0.3)';
-            for (let i = 0; i < 20; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                ctx.font = '20px Arial';
-                ctx.fillText('💕', x, y);
+            // Draw perforations
+            ctx.fillStyle = '#444444';
+            const holeWidth = 15;
+            const holeHeight = 25;
+            const spacing = 40;
+            for (let y = 20; y < canvas.height; y += spacing) {
+                ctx.fillRect(5, y, holeWidth, holeHeight); // left
+                ctx.fillRect(canvas.width - holeWidth - 5, y, holeWidth, holeHeight); // right
             }
             break;
-
-        case 'space':
-            ctx.fillStyle = '#0f0f23';
+                case 'summer':
+            ctx.fillStyle = '#e3d584ff'; // warm sandy yellow
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add stars
-            ctx.fillStyle = '#ffffff';
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
+            ctx.fillStyle = '#c8dd3cff'; // coral waves
+            for (let i = 0; i < 10; i++) {
                 ctx.beginPath();
-                ctx.arc(x, y, Math.random() * 2, 0, Math.PI * 2);
+                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 20, 0, Math.PI * 2);
                 ctx.fill();
             }
             break;
 
-        case 'neon':
-            ctx.fillStyle = '#000510';
+
+        case 'space':
+            ctx.fillStyle = '#000000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add neon glow effect
-            const neonGradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width/2);
-            neonGradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)');
-            neonGradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.2)');
-            neonGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = '#ffffff';
+            for (let i = 0; i < 100; i++) {
+                ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 2, 2);
+            }
+            ctx.fillStyle = '#ffff99';
+            ctx.fillText('🌟', canvas.width / 2, 50);
+            break;
+
+        case 'neon':
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const neonGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            neonGradient.addColorStop(0, '#c05dc0ff');
+            neonGradient.addColorStop(1, '#7745a6ff');
             ctx.fillStyle = neonGradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.fillText('💫', canvas.width / 2, 40);
             break;
 
         case 'autumn':
-            const autumnGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            autumnGradient.addColorStop(0, '#ff7f50');
-            autumnGradient.addColorStop(0.5, '#daa520');
-            autumnGradient.addColorStop(1, '#8b4513');
-            ctx.fillStyle = autumnGradient;
+            ctx.fillStyle = '#f4a460';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add autumn leaves
-            ctx.font = '16px Arial';
-            const leaves = ['🍂', '🍁', '🌿'];
-            for (let i = 0; i < 15; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const leaf = leaves[Math.floor(Math.random() * leaves.length)];
-                ctx.fillText(leaf, x, y);
+            ctx.fillStyle = '#8b4513';
+            for (let i = 0; i < 20; i++) {
+                ctx.fillText('🍂', Math.random() * canvas.width, Math.random() * canvas.height);
             }
             break;
 
         case 'winter':
-            const winterGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            winterGradient.addColorStop(0, '#e6f3ff');
-            winterGradient.addColorStop(1, '#b8d4f0');
-            ctx.fillStyle = winterGradient;
+            ctx.fillStyle = '#e0f7fa';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add snowflakes
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            for (let i = 0; i < 50; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                ctx.font = '12px Arial';
-                ctx.fillText('❄', x, y);
+            ctx.fillStyle = '#ffffff';
+            for (let i = 0; i < 40; i++) {
+                ctx.fillText('❄️', Math.random() * canvas.width, Math.random() * canvas.height);
             }
             break;
 
         case 'spring':
-            const springGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            springGradient.addColorStop(0, '#e8f5e8');
-            springGradient.addColorStop(0.5, '#ffc0cb');
-            springGradient.addColorStop(1, '#98fb98');
-            ctx.fillStyle = springGradient;
+            ctx.fillStyle = '#ccffcc';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add cherry blossoms
-            ctx.font = '14px Arial';
-            const blossoms = ['🌸', '🌼', '🌻'];
             for (let i = 0; i < 20; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const blossom = blossoms[Math.floor(Math.random() * blossoms.length)];
-                ctx.fillText(blossom, x, y);
+                ctx.fillText('🌸', Math.random() * canvas.width, Math.random() * canvas.height);
             }
             break;
+            // Dark Theme 1: Galactic Stars
+case 'galactic':
+    ctx.fillStyle = '#0b0c10'; // very dark background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw stars
+    for (let i = 0; i < 150; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 2 + 1; // small stars
+        const alpha = Math.random() * 0.8 + 0.2; // varying brightness
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Optional: add a glowing moon
+    ctx.fillStyle = 'rgba(255,255,200,0.3)';
+    ctx.beginPath();
+    ctx.arc(canvas.width - 80, 80, 50, 0, Math.PI * 2);
+    ctx.fill();
+    break;
+
+// Dark Theme 2: Neon Grid
+case 'neonGrid':
+    ctx.fillStyle = '#111111'; // pitch black background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw neon grid
+    const gridSpacing = 50;
+    for (let x = 0; x < canvas.width; x += gridSpacing) {
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'; // cyan neon lines
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += gridSpacing) {
+        ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)'; // pink neon lines
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
+
+    // Optional: glow in center
+    const neonGrad = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, 100);
+    neonGrad.addColorStop(0, 'rgba(0,255,255,0.4)');
+    neonGrad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = neonGrad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    break;
 
         case 'ocean':
-            const oceanGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            oceanGradient.addColorStop(0, '#87ceeb');
-            oceanGradient.addColorStop(0.5, '#4682b4');
-            oceanGradient.addColorStop(1, '#191970');
-            ctx.fillStyle = oceanGradient;
+            ctx.fillStyle = '#1e90ff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add wave effects
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.lineWidth = 2;
-            for (let i = 0; i < 5; i++) {
+            ctx.fillStyle = '#00ced1';
+            for (let i = 0; i < 15; i++) {
                 ctx.beginPath();
-                ctx.moveTo(0, canvas.height * 0.2 + i * 40);
-                for (let x = 0; x < canvas.width; x += 20) {
-                    ctx.quadraticCurveTo(x + 10, canvas.height * 0.2 + i * 40 - 10, x + 20, canvas.height * 0.2 + i * 40);
-                }
+                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 30, 0, Math.PI * 2);
                 ctx.stroke();
             }
+            ctx.fillText('🌊', canvas.width / 2, 40);
             break;
 
         case 'sunset':
-            const sunsetGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            sunsetGradient.addColorStop(0, '#ff7f50');
-            sunsetGradient.addColorStop(0.3, '#ffa500');
-            sunsetGradient.addColorStop(0.7, '#ff69b4');
-            sunsetGradient.addColorStop(1, '#4b0082');
-            ctx.fillStyle = sunsetGradient;
+            const sunsetGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            sunsetGrad.addColorStop(0, '#ff7e5f');
+            sunsetGrad.addColorStop(1, '#feb47b');
+            ctx.fillStyle = sunsetGrad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add sun
-            ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
-            ctx.beginPath();
-            ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 30, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.fillText('🌅', canvas.width / 2, 40);
             break;
 
         case 'forest':
-            const forestGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            forestGradient.addColorStop(0, '#90ee90');
-            forestGradient.addColorStop(0.5, '#228b22');
-            forestGradient.addColorStop(1, '#006400');
-            ctx.fillStyle = forestGradient;
+            ctx.fillStyle = '#228B22';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add trees
-            ctx.font = '18px Arial';
-            const trees = ['🌲', '🌳', '🌿'];
-            for (let i = 0; i < 12; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const tree = trees[Math.floor(Math.random() * trees.length)];
-                ctx.fillText(tree, x, y);
+            for (let i = 0; i < 15; i++) {
+                ctx.fillText('🌲', Math.random() * canvas.width, Math.random() * canvas.height);
             }
             break;
 
         case 'midnight':
-            const midnightGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            midnightGradient.addColorStop(0, '#191970');
-            midnightGradient.addColorStop(0.5, '#000080');
-            midnightGradient.addColorStop(1, '#000000');
-            ctx.fillStyle = midnightGradient;
+            ctx.fillStyle = '#191970';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add moon and stars
-            ctx.fillStyle = '#f0f8ff';
-            ctx.beginPath();
-            ctx.arc(canvas.width * 0.8, canvas.height * 0.15, 25, 0, Math.PI * 2);
-            ctx.fill();
-            // Add stars
-            for (let i = 0; i < 30; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height * 0.5;
-                ctx.font = '10px Arial';
-                ctx.fillText('✨', x, y);
-            }
+            ctx.fillStyle = '#fffacd';
+            ctx.fillText('🌙', canvas.width / 2, 40);
             break;
 
         case 'rainbow':
-            const rainbowGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            rainbowGradient.addColorStop(0, '#ff0000');
-            rainbowGradient.addColorStop(0.17, '#ff8000');
-            rainbowGradient.addColorStop(0.33, '#ffff00');
-            rainbowGradient.addColorStop(0.5, '#00ff00');
-            rainbowGradient.addColorStop(0.67, '#0000ff');
-            rainbowGradient.addColorStop(0.83, '#8000ff');
-            rainbowGradient.addColorStop(1, '#ff00ff');
-            ctx.fillStyle = rainbowGradient;
+            const rainbowGrad = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            rainbowGrad.addColorStop(0, 'red');
+            rainbowGrad.addColorStop(0.17, 'orange');
+            rainbowGrad.addColorStop(0.34, 'yellow');
+            rainbowGrad.addColorStop(0.51, 'green');
+            rainbowGrad.addColorStop(0.68, 'blue');
+            rainbowGrad.addColorStop(0.85, 'indigo');
+            rainbowGrad.addColorStop(1, 'violet');
+            ctx.fillStyle = rainbowGrad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText('🌈', canvas.width / 2, 40);
             break;
+        case 'love':
+    // Gradient background
+    const loveGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    loveGrad.addColorStop(0, '#ffafbd'); // light pink
+    loveGrad.addColorStop(1, '#ffc3a0'); // peachy pink
+    ctx.fillStyle = loveGrad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw floating hearts
+    for (let i = 0; i < 40; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 30 + 20; // 20-50px
+        const angle = Math.random() * Math.PI * 2;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        // Draw heart emoji with slight transparency for depth
+        ctx.font = `${size}px Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = `rgba(255, 0, 0, ${Math.random() * 0.5 + 0.5})`; // semi-transparent
+        ctx.fillText('❤️', 0, 0);
+
+        ctx.restore();
+    }
+
+    // Optional: Add a subtle “photobooth” text on top
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    ctx.font = 'bold 20px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('photobooth', canvas.width / 2, 30);
+
+    break;
 
         case 'minimalist':
-            ctx.fillStyle = '#ffffff';
+            ctx.fillStyle = '#f8f9fa';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add subtle grid lines
-            ctx.strokeStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < canvas.width; i += 50) {
-                ctx.beginPath();
-                ctx.moveTo(i, 0);
-                ctx.lineTo(i, canvas.height);
-                ctx.stroke();
-            }
-            for (let i = 0; i < canvas.height; i += 50) {
-                ctx.beginPath();
-                ctx.moveTo(0, i);
-                ctx.lineTo(canvas.width, i);
-                ctx.stroke();
-            }
+            ctx.strokeStyle = '#000';
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+            ctx.fillText('⚪', canvas.width / 2, 40);
             break;
 
         case 'pastel':
-            const pastelGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            pastelGradient.addColorStop(0, '#ffeaa7');
-            pastelGradient.addColorStop(0.25, '#fab1a0');
-            pastelGradient.addColorStop(0.5, '#fd79a8');
-            pastelGradient.addColorStop(0.75, '#e17055');
-            pastelGradient.addColorStop(1, '#fdcb6e');
-            ctx.fillStyle = pastelGradient;
+            const pastelGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            pastelGrad.addColorStop(0, '#ffd1dc');
+            pastelGrad.addColorStop(1, '#c1e1c1');
+            ctx.fillStyle = pastelGrad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Add soft clouds
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-            for (let i = 0; i < 8; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                ctx.beginPath();
-                ctx.arc(x, y, 20 + Math.random() * 20, 0, Math.PI * 2);
-                ctx.fill();
-            }
+            ctx.fillText('🎨', canvas.width / 2, 40);
             break;
 
         case 'gradient':
-            const customGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            customGradient.addColorStop(0, '#667eea');
-            customGradient.addColorStop(0.5, '#764ba2');
-            customGradient.addColorStop(1, '#f093fb');
-            ctx.fillStyle = customGradient;
+            const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            grad.addColorStop(0, '#8e2de2');
+            grad.addColorStop(1, '#4a00e0');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText('🔮', canvas.width / 2, 40);
+            break;
+
+        case 'plainMaroon':
+            ctx.fillStyle = '#800000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             break;
+
+        case 'plainRed':
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+
+        case 'plainPink':
+            ctx.fillStyle = '#ffc0cb';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+
+        case 'plainBlue':
+            ctx.fillStyle = '#090935ff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+
+        case 'plainBlack':
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 'Matcha':
+            ctx.fillStyle = '#1d3110ff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+
 
         default:
             ctx.fillStyle = '#ffffff';
@@ -444,20 +472,28 @@ function getThemeTextColor() {
         case 'space':
         case 'neon':
         case 'midnight':
+        case 'love':
         case 'forest':
         case 'ocean':
-            return '#ffffff';
+        case 'filmstrip':
+        case 'plainBlack':
+        case 'plainMaroon':
+        case 'plainBlue':
+            return '#ffffff'; // light text on dark
         case 'party':
         case 'sunset':
         case 'rainbow':
         case 'gradient':
-            return '#ffffff';
         case 'autumn':
             return '#ffffff';
+        case 'plainRed':
+        case 'plainPink':
+            return '#000000'; // dark text on light
         default:
             return '#333333';
     }
 }
+
 
 function drawDecorations() {
     const canvas = document.getElementById('photoStripCanvas');
@@ -555,7 +591,7 @@ async function downloadFinalStrip() {
     // Get canvas and frame container positions for coordinate calculation
     const canvasRect = canvas.getBoundingClientRect();
     const frameRect = frame.getBoundingClientRect();
-    
+
     // Calculate scale factors between displayed canvas and actual canvas dimensions
     const scaleX = canvas.width / canvasRect.width;
     const scaleY = canvas.height / canvasRect.height;
@@ -565,24 +601,24 @@ async function downloadFinalStrip() {
         img.src = sticker.src;
         img.onload = () => {
             const stickerRect = sticker.getBoundingClientRect();
-            
+
             // Calculate position relative to frameContainer first
             const frameRelativeX = stickerRect.left - frameRect.left;
             const frameRelativeY = stickerRect.top - frameRect.top;
-            
+
             // Then calculate relative to canvas within the frame
             const canvasOffsetX = canvasRect.left - frameRect.left;
             const canvasOffsetY = canvasRect.top - frameRect.top;
-            
+
             const canvasRelativeX = frameRelativeX - canvasOffsetX;
             const canvasRelativeY = frameRelativeY - canvasOffsetY;
-            
+
             // Scale coordinates to match actual canvas dimensions
             const x = canvasRelativeX * scaleX;
             const y = canvasRelativeY * scaleY;
             const width = sticker.width * scaleX;
             const height = sticker.height * scaleY;
-            
+
             ctx.drawImage(img, x, y, width, height);
             resolve();
         };

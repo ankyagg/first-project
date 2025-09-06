@@ -930,10 +930,10 @@ html {
     height: 35px;
   }
   #edit .action-buttons {
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-  }
+  order: 3;         /* push actions below photostrip */
+  width: 100%;      /* full width */
+  justify-content: center;
+}
   #edit .action-btn {
     flex: 1;
     min-width: 120px;
@@ -978,7 +978,7 @@ html {
   #edit .stickers-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    max-height: 200px;
+    max-height: 600px;
   }
   #edit .sticker-btn {
     padding: 6px;
