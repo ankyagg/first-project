@@ -838,6 +838,22 @@ html {
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+        
+        .action-buttons {
+            order: 1;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .frame-container {
+            order: 2;
+            position: relative;
+        }
+        
+        .canvas-info {
+            order: 3;
+        }
     }
 
     .right-panel {
@@ -846,6 +862,7 @@ html {
         backdrop-filter: blur(10px);
         border-radius: 20px;
         padding: 20px;
+        height: 150vh;
     }
 
     .panel-title {
@@ -890,6 +907,79 @@ html {
         user-select: none;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: all 0.2s ease;
+        object-fit: contain;
+        
+        
+    }
+    
+    // Zoom controls for stickers
+    .zoom-controls {
+        position: absolute;
+        display: flex;
+        gap: 5px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 20px;
+        padding: 5px;
+        backdrop-filter: blur(10px);
+        z-index: 1002;
+        animation: fadeIn 0.2s ease-out;
+        
+        .zoom-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            &:hover {
+                background: white;
+                transform: scale(1.1);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            }
+            
+            &:active {
+                transform: scale(0.95);
+            }
+            
+            &.delete-sticker {
+                background: rgba(255, 59, 48, 0.9);
+                color: white;
+                
+                &:hover {
+                    background: rgba(255, 59, 48, 1);
+                }
+            }
+            
+            &.zoom-reset {
+                background: rgba(52, 199, 89, 0.9);
+                color: white;
+                font-size: 14px;
+                
+                &:hover {
+                    background: rgba(52, 199, 89, 1);
+                }
+            }
+        }
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .canvas-info {
@@ -981,9 +1071,11 @@ html {
 
     .action-buttons {
         display: flex;
-        gap: 15px;
+        gap: 20px;
         margin-top: 30px;
         justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 
     .action-btn {
@@ -998,6 +1090,178 @@ html {
         &:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    }
+
+    .container-button {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "bt-1 bt-2 bt-3"
+          "bt-4 bt-5 bt-6";
+        position: relative;
+        perspective: 800px;
+        padding: 0;
+        width: 135px;
+        height: 47px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        .hover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 200;
+        }
+
+        .bt-1 {
+            grid-area: bt-1;
+
+            &:hover ~ button {
+                transform: rotateX(15deg) rotateY(-15deg) rotateZ(0deg);
+                box-shadow: -2px -2px rgba(236, 104, 166, 0.4);
+
+                &::after {
+                    animation: shake 0.5s ease-in-out 0.3s;
+                    text-shadow: -2px -2px rgba(236, 104, 166, 0.4);
+                }
+            }
+        }
+
+        .bt-2 {
+            grid-area: bt-2;
+        }
+
+        .bt-3 {
+            grid-area: bt-3;
+
+            &:hover ~ button {
+                transform: rotateX(15deg) rotateY(15deg) rotateZ(0deg);
+                box-shadow: 2px -2px rgba(236, 104, 166, 0.4);
+
+                &::after {
+                    animation: shake 0.5s ease-in-out 0.3s;
+                    text-shadow: 2px -2px rgba(236, 104, 166, 0.4);
+                }
+            }
+        }
+
+        .bt-4 {
+            grid-area: bt-4;
+
+            &:hover ~ button {
+                transform: rotateX(-15deg) rotateY(-15deg) rotateZ(0deg);
+                box-shadow: -2px 2px rgba(236, 104, 166, 0.4);
+
+                &::after {
+                    animation: shake 0.5s ease-in-out 0.3s;
+                    text-shadow: -2px 2px rgba(236, 104, 166, 0.4);
+                }
+            }
+        }
+
+        .bt-5 {
+            grid-area: bt-5;
+        }
+
+        .bt-6 {
+            grid-area: bt-6;
+
+            &:hover ~ button {
+                transform: rotateX(-15deg) rotateY(15deg) rotateZ(0deg);
+                box-shadow: 2px 2px rgba(236, 104, 166, 0.4);
+
+                &::after {
+                    animation: shake 0.5s ease-in-out 0.3s;
+                    text-shadow: 2px 2px rgba(236, 104, 166, 0.4);
+                }
+            }
+        }
+
+        .hover:hover ~ button {
+            &::before {
+                background: transparent;
+            }
+
+            &::after {
+                content: "ME";
+                top: -150%;
+                transform: translate(-50%, 0);
+                font-size: 34px;
+                color: aliceblue;
+            }
+        }
+
+        button {
+            position: absolute;
+            padding: 0;
+            width: 135px;
+            height: 47px;
+            background: transparent;
+            font-size: 17px;
+            font-weight: 900;
+            border: 3px solid #EC68A6;
+            border-radius: 12px;
+            transition: all 0.3s ease-in-out;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 135px;
+                height: 47px;
+                background-color: #F8E0E6;
+                border-radius: 12px;
+                transition: all 0.3s ease-in-out;
+                z-index: -1;
+            }
+
+            &::after {
+                content: "Download";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 135px;
+                height: 47px;
+                background-color: transparent;
+                font-size: 17px;
+                font-weight: 900;
+                line-height: 47px;
+                color: #EC68A6;
+                border: none;
+                border-radius: 12px;
+                transition: all 0.3s ease-in-out;
+                z-index: 2;
+            }
+        }
+    }
+
+    @keyframes shake {
+        0% {
+            left: 45%;
+        }
+
+        25% {
+            left: 54%;
+        }
+
+        50% {
+            left: 48%;
+        }
+
+        75% {
+            left: 52%;
+        }
+
+        100% {
+            left: 50%;
         }
     }
 
@@ -1059,26 +1323,29 @@ html {
         }
         
         .themes-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin-bottom: 20px;
         }
         
         .theme-card {
-            padding: 15px;
-            min-height: 100px; // Better touch target
+            padding: 8px;
+            min-height: 70px;
+            border-radius: 10px;
             
             .theme-icon {
-                font-size: 30px;
-                margin-bottom: 8px;
+                font-size: 20px;
+                margin-bottom: 4px;
             }
             
             .theme-label {
-                font-size: 14px;
+                font-size: 11px;
+                margin-bottom: 2px;
             }
             
             .theme-desc {
-                font-size: 11px;
+                font-size: 9px;
+                display: none; // Hide description on mobile for compact view
             }
         }
         
@@ -1100,14 +1367,20 @@ html {
         }
         
         .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             margin-top: 20px;
+            width: 100%;
+            max-width: 350px;
         }
         
         .action-btn {
-            flex: 1;
-            min-width: 120px;
+            flex: 0 1 auto;
+            min-width: 130px;
+            max-width: 150px;
             padding: 10px 16px;
             font-size: 14px;
             min-height: 50px; // Better touch target
@@ -1124,10 +1397,22 @@ html {
         .left-panel, .right-panel {
             padding: 10px;
         }
+        .right-panel{
+            height: 148vh;
+            .action-buttons{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                margin-top: 23em;
+                width: 100%;
+            }
+        }
         
         .left-panel {
             background: transparent;
             padding: 5px;
+            margin-top: 5em;
             
             #photoStripCanvas {
                 max-width: 300px;
@@ -1145,15 +1430,27 @@ html {
         }
         
         .themes-grid {
-            grid-template-columns: 1fr;
-            gap: 8px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
         }
         
         .theme-card {
-            padding: 12px;
+            padding: 6px;
+            min-height: 60px;
+            border-radius: 8px;
             
             .theme-icon {
-                font-size: 24px;
+                font-size: 18px;
+                margin-bottom: 3px;
+            }
+            
+            .theme-label {
+                font-size: 15px;
+                margin-bottom: 0;
+            }
+            
+            .theme-desc {
+                display: none; // Hide description for compact view
             }
         }
         
@@ -1161,6 +1458,7 @@ html {
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             max-height: 200px;
+            margin-bottom: 20px;
         }
         
         .sticker-btn {
@@ -1175,7 +1473,9 @@ html {
         }
         
         .action-btn {
-            min-width: 100px;
+            flex: 0 1 auto;
+            min-width: 120px;
+            max-width: 140px;
             padding: 8px 12px;
             font-size: 13px;
         }

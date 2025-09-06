@@ -154,7 +154,7 @@ body.dark h1 {
     font-size: clamp(12px, 3vw, 24px);
   }
   .nav {
-    flex-direction: column;
+    flex-direction:row;
     gap: 0.5rem;
     padding: 0.5rem 0;
   }

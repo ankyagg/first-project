@@ -704,6 +704,19 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+}
+#edit .left-panel .action-buttons {
+  order: 1;
+  width: 100%;
+  max-width: 400px;
+}
+#edit .left-panel .frame-container {
+  order: 2;
+  position: relative;
+}
+#edit .left-panel .canvas-info {
+  order: 3;
 }
 #edit .right-panel {
   flex: 2;
@@ -712,6 +725,7 @@ html {
           backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 20px;
+  height: 150vh;
 }
 #edit .panel-title {
   color: white;
@@ -753,6 +767,69 @@ html {
           user-select: none;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+#edit .zoom-controls {
+  position: absolute;
+  display: flex;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  padding: 5px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  z-index: 1002;
+  animation: fadeIn 0.2s ease-out;
+}
+#edit .zoom-controls .zoom-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#edit .zoom-controls .zoom-btn:hover {
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+#edit .zoom-controls .zoom-btn:active {
+  transform: scale(0.95);
+}
+#edit .zoom-controls .zoom-btn.delete-sticker {
+  background: rgba(255, 59, 48, 0.9);
+  color: white;
+}
+#edit .zoom-controls .zoom-btn.delete-sticker:hover {
+  background: rgb(255, 59, 48);
+}
+#edit .zoom-controls .zoom-btn.zoom-reset {
+  background: rgba(52, 199, 89, 0.9);
+  color: white;
+  font-size: 14px;
+}
+#edit .zoom-controls .zoom-btn.zoom-reset:hover {
+  background: rgb(52, 199, 89);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 #edit .canvas-info {
   color: rgba(255, 255, 255, 0.8);
@@ -832,9 +909,11 @@ html {
 }
 #edit .action-buttons {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   margin-top: 30px;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 #edit .action-btn {
   padding: 12px 24px;
@@ -848,6 +927,148 @@ html {
 #edit .action-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+#edit .container-button {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "bt-1 bt-2 bt-3" "bt-4 bt-5 bt-6";
+  position: relative;
+  perspective: 800px;
+  padding: 0;
+  width: 135px;
+  height: 47px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+#edit .container-button:active {
+  transform: scale(0.95);
+}
+#edit .container-button .hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+#edit .container-button .bt-1 {
+  grid-area: bt-1;
+}
+#edit .container-button .bt-1:hover ~ button {
+  transform: rotateX(15deg) rotateY(-15deg) rotateZ(0deg);
+  box-shadow: -2px -2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-1:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: -2px -2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-2 {
+  grid-area: bt-2;
+}
+#edit .container-button .bt-3 {
+  grid-area: bt-3;
+}
+#edit .container-button .bt-3:hover ~ button {
+  transform: rotateX(15deg) rotateY(15deg) rotateZ(0deg);
+  box-shadow: 2px -2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-3:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: 2px -2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-4 {
+  grid-area: bt-4;
+}
+#edit .container-button .bt-4:hover ~ button {
+  transform: rotateX(-15deg) rotateY(-15deg) rotateZ(0deg);
+  box-shadow: -2px 2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-4:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: -2px 2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-5 {
+  grid-area: bt-5;
+}
+#edit .container-button .bt-6 {
+  grid-area: bt-6;
+}
+#edit .container-button .bt-6:hover ~ button {
+  transform: rotateX(-15deg) rotateY(15deg) rotateZ(0deg);
+  box-shadow: 2px 2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .bt-6:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: 2px 2px rgba(236, 104, 166, 0.4);
+}
+#edit .container-button .hover:hover ~ button::before {
+  background: transparent;
+}
+#edit .container-button .hover:hover ~ button::after {
+  content: "ME";
+  top: -150%;
+  transform: translate(-50%, 0);
+  font-size: 34px;
+  color: aliceblue;
+}
+#edit .container-button button {
+  position: absolute;
+  padding: 0;
+  width: 135px;
+  height: 47px;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 900;
+  border: 3px solid #EC68A6;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+}
+#edit .container-button button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135px;
+  height: 47px;
+  background-color: #F8E0E6;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+#edit .container-button button::after {
+  content: "Download";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135px;
+  height: 47px;
+  background-color: transparent;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 47px;
+  color: #EC68A6;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+}
+@keyframes shake {
+  0% {
+    left: 45%;
+  }
+  25% {
+    left: 54%;
+  }
+  50% {
+    left: 48%;
+  }
+  75% {
+    left: 52%;
+  }
+  100% {
+    left: 50%;
+  }
 }
 #edit .primary-btn {
   background: #4CAF50;
@@ -897,23 +1118,26 @@ html {
     margin-bottom: 15px;
   }
   #edit .themes-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     margin-bottom: 20px;
   }
   #edit .theme-card {
-    padding: 15px;
-    min-height: 100px;
+    padding: 8px;
+    min-height: 70px;
+    border-radius: 10px;
   }
   #edit .theme-card .theme-icon {
-    font-size: 30px;
-    margin-bottom: 8px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
   #edit .theme-card .theme-label {
-    font-size: 14px;
+    font-size: 11px;
+    margin-bottom: 2px;
   }
   #edit .theme-card .theme-desc {
-    font-size: 11px;
+    font-size: 9px;
+    display: none;
   }
   #edit .stickers-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -930,13 +1154,19 @@ html {
     height: 35px;
   }
   #edit .action-buttons {
-  order: 3;         /* push actions below photostrip */
-  width: 100%;      /* full width */
-  justify-content: center;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 350px;
+  }
   #edit .action-btn {
-    flex: 1;
-    min-width: 120px;
+    flex: 0 1 auto;
+    min-width: 130px;
+    max-width: 150px;
     padding: 10px 16px;
     font-size: 14px;
     min-height: 50px;
@@ -949,9 +1179,21 @@ html {
   #edit .left-panel, #edit .right-panel {
     padding: 10px;
   }
+  #edit .right-panel {
+    height: 148vh;
+  }
+  #edit .right-panel .action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 23em;
+    width: 100%;
+  }
   #edit .left-panel {
     background: transparent;
     padding: 5px;
+    margin-top: 5em;
   }
   #edit .left-panel #photoStripCanvas {
     max-width: 300px;
@@ -966,19 +1208,30 @@ html {
     font-size: 18px;
   }
   #edit .themes-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
   #edit .theme-card {
-    padding: 12px;
+    padding: 6px;
+    min-height: 60px;
+    border-radius: 8px;
   }
   #edit .theme-card .theme-icon {
-    font-size: 24px;
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+  #edit .theme-card .theme-label {
+    font-size: 15px;
+    margin-bottom: 0;
+  }
+  #edit .theme-card .theme-desc {
+    display: none;
   }
   #edit .stickers-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    max-height: 600px;
+    max-height: 200px;
+    margin-bottom: 20px;
   }
   #edit .sticker-btn {
     padding: 6px;
@@ -990,7 +1243,9 @@ html {
     height: 30px;
   }
   #edit .action-btn {
-    min-width: 100px;
+    flex: 0 1 auto;
+    min-width: 120px;
+    max-width: 140px;
     padding: 8px 12px;
     font-size: 13px;
   }
