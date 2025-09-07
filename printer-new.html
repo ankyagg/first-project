@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adore Moments</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <style>
+        @font-face {
+            font-family: 'Outfit';
+            src: url("../fonts/OutfitRegular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Outfit';
+            src: url("../fonts/OutfitBold.ttf") format("truetype");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Main Container */
+        .printer-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Title at very top */
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .title {
+            font-size: clamp(28px, 4vw, 36px);
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 400;
+        }
+
+        /* PRINTER AT THE TOP - ALLOWS OVERLAP */
+        .printer-machine {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px 40px; /* Reduced padding for compact size */
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 100; /* Lower than strip to allow overlap */
+        }
+
+        .printer-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .printer-brand {
+            font-size: 16px; /* Reduced */
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 4px;
+        }
+
+        .printer-status {
+            font-size: 12px; /* Reduced */
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Printer Slot - CLEAN BLACK OPENING */
+        .printer-slot {
+            width: 280px;
+            height: 16px;
+            background: linear-gradient(180deg, #333, #000);
+            border-radius: 8px;
+            position: relative;
+            overflow: visible;
+            box-shadow: inset 0 6px 15px rgba(0, 0, 0, 0.8);
+            margin: 0 auto;
+            z-index: 200;
+        }
+
+        .slot-opening {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, #444, #000);
+            border-radius: 8px;
+        }
+
+        /* EDITED PHOTO STRIP CONTAINER - POSITIONED BELOW PRINTER */
+        .photos-output {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* Hide strip until it's ready to emerge */
+            margin-top: 10px; /* Position below printer, not overlapping */
+            z-index: 50;
+            min-height: 400px; /* Space for strip to emerge into */
+        }
+
+        /* The Final Edited Photo Strip - HIDDEN UNTIL BELOW PRINTER */
+        .edited-strip {
+            width: 280px; /* Match printer slot width */
+            max-height: 60vh;
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: 50px; /* Position below printer area */
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%); /* Start hidden */
+            opacity: 0; /* Initially invisible */
+            z-index: 300; /* Above everything */
+            animation: emergeFromBelowPrinter 5s ease-out 2s forwards;
+            overflow: hidden;
+        }
+
+        .strip-content {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 50vh; /* Ensure image content fits viewport */
+        }
+
+        .strip-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            max-height: 50vh; /* Limit image height */
+            object-fit: contain; /* Maintain aspect ratio */
+        }
+
+        .strip-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .strip-brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 4px;
+        }
+
+        .strip-date {
+            font-size: 11px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            width: 90%;
+            max-width: 400px;
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 8s both;
+        }
+
+        /* Emergency access button - always visible */
+        .emergency-retake {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #e91e63;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .emergency-retake:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Reduced gap */
+            padding: 12px 20px; /* Reduced padding */
+            border: none;
+            border-radius: 16px; /* Reduced radius */
+            font-size: 13px; /* Reduced font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .primary-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #e91e63;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes emergeFromBelowPrinter {
+            0% {
+                transform: translateX(-50%) translateY(-100%); /* Hidden below printer area */
+                opacity: 0;
+            }
+            30% {
+                transform: translateX(-50%) translateY(-100%); /* Stay hidden longer */
+                opacity: 0;
+            }
+            40% {
+                opacity: 1; /* Become visible only when emerging */
+                transform: translateX(-50%) translateY(-80%); /* Start emerging */
+            }
+            60% {
+                transform: translateX(-50%) translateY(-50%); /* Half emerged */
+                opacity: 1;
+            }
+            80% {
+                transform: translateX(-50%) translateY(-20%); /* Almost out */
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(10px); /* Fully emerged */
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .printer-container {
+                padding: 10px;
+            }
+
+            .header {
+                margin: 10px 0;
+            }
+
+            .title {
+                font-size: clamp(24px, 6vw, 36px);
+            }
+
+            .subtitle {
+                font-size: 12px;
+            }
+
+            .printer-machine {
+                padding: 15px 20px;
+                margin-bottom: 10px;
+            }
+
+            .printer-brand {
+                font-size: 14px;
+            }
+
+            .printer-status {
+                font-size: 11px;
+            }
+
+            .printer-slot {
+                width: 240px;
+                height: 14px;
+            }
+
+            .edited-strip {
+                width: 240px;
+                padding: 12px;
+                top: 40px;
+            }
+
+            .strip-content {
+                max-height: 40vh;
+            }
+
+            .strip-content img {
+                max-height: 40vh;
+            }
+
+            .action-section {
+                bottom: 15px;
+                gap: 10px;
+            }
+
+            .action-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+                min-width: 100px;
+                min-height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .printer-container {
+                padding: 5px;
+            }
+
+            .header {
+                margin: 5px 0;
+            }
+
+            .title {
+                font-size: clamp(20px, 5vw, 28px);
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .printer-machine {
+                padding: 12px 16px;
+                margin-bottom: 8px;
+            }
+
+            .printer-brand {
+                font-size: 12px;
+            }
+
+            .printer-status {
+                font-size: 10px;
+            }
+            .emergency-retake{
+                position: absolute;
+                top:53em;
+                right:15em;
+            }
+            .printer-slot {
+                width: 200px;
+                height: 12px;
+            }
+
+            .edited-strip {
+                width: 200px;
+                padding: 10px;
+                top: 30px;
+            }
+
+            .strip-content {
+                max-height: 35vh;
+            }
+
+            .strip-content img {
+                max-height: 35vh;
+            }
+
+            .action-section {
+                bottom: 10px;
+                gap: 8px;
+                width: 95%;
+            }
+
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+                min-width: 80px;
+                min-height: 40px;
+            }
+        }
+
+        /* Landscape Mobile Optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .printer-container {
+                padding: 5px;
+            }
+
+            .header {
+                margin: 5px 0;
+            }
+
+            .title {
+                font-size: clamp(18px, 4vw, 24px);
+            }
+
+            .subtitle {
+                font-size: 10px;
+            }
+
+            .printer-machine {
+                padding: 10px 15px;
+                margin-bottom: 5px;
+            }
+
+            .edited-strip {
+                top: 25px;
+                max-height: 50vh;
+            }
+
+            .strip-content {
+                max-height: 45vh;
+            }
+
+            .strip-content img {
+                max-height: 45vh;
+            }
+
+            .action-section {
+                bottom: 5px;
+            }
+
+            .emergency-retake {
+                position: absolute;
+                top: 10px;
+                right: 100px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .action-btn, .emergency-retake {
+                min-height: 48px;
+                min-width: 48px;
+            }
+
+            .action-btn:hover, .emergency-retake:hover {
+                transform: none;
+            }
+
+            .action-btn:active, .emergency-retake:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+        }
+
+        /* High DPI Display Support */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .title, .subtitle, .printer-brand, .printer-status {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="printer-container">
+        <!-- Title -->
+        <div class="header">
+            <h1 class="title">photos</h1>
+            <p class="subtitle">printing your memories...</p>
+        </div>
+
+        <div class="printer-machine">
+            <div class="printer-display">
+                <div class="printer-brand">📸 photobooth</div>
+                <div class="printer-status" id="printerStatus">preparing to print...</div>
+            </div>
+
+            <div class="printer-slot">
+                <div class="slot-opening"></div>
+            </div>
+        </div>
+
+        <div class="photos-output">
+            <div class="edited-strip" id="editedStrip">
+                <div class="strip-header">
+                    <div class="strip-brand">📸 photobooth</div>
+                    <div class="strip-date" id="stripDate"></div>
+                </div>
+                <div class="strip-content" id="stripContent">
+                    <!-- Edited canvas will be loaded here -->
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        Loading your edited strip...
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Emergency Retake Button (always accessible) -->
+        <button class="emergency-retake" onclick="goHome()" title="Return to capture">
+            ↺ Retake
+        </button>
+
+        <!-- Action Buttons -->
+        
+    </div>
+
+    <script>
+        // Animation sequence
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set date
+            const now = new Date();
+            const dateString = now.toLocaleDateString();
+            document.getElementById('stripDate').textContent = dateString;
+
+            // Status sequence for 5-second printing (1.5+ sec per photo)
+            const statuses = [
+                'preparing to print...',
+                'printing photo 1...',
+                'printing photo 2...',
+                'printing photo 3...',
+                'finalizing...',
+                'strip complete! ✨'
+            ];
+
+            const statusTiming = [1000, 2500, 4000, 5500, 6500, 7500];
+
+            let statusIndex = 0;
+            const printerStatus = document.getElementById('printerStatus');
+
+            statusTiming.forEach((delay, index) => {
+                setTimeout(() => {
+                    if (statusIndex < statuses.length) {
+                        printerStatus.textContent = statuses[statusIndex];
+                        statusIndex++;
+                    }
+                }, delay);
+            });
+
+            // Load the edited canvas
+            loadEditedStrip();
+        });
+
+        // Load the edited photo strip with themes and stickers
+        function loadEditedStrip() {
+            const editedStripData = localStorage.getItem('editedPhotoStrip');
+            if (editedStripData) {
+                const img = document.createElement('img');
+                img.src = editedStripData;
+                img.style.cssText = `
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    border-radius: 12px;
+                `;
+
+                // Replace loading message
+                const stripContent = document.getElementById('stripContent');
+                stripContent.innerHTML = '';
+                stripContent.appendChild(img);
+            } else {
+                // Fallback - show message
+                document.getElementById('stripContent').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        No edited strip found.<br>
+                        <small>Please go back and create your strip.</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Button functions
+        function downloadPhotos() {
+            // Download the edited strip again
+            const editedStripData = localStorage.getItem('editedPhotoStrip');
+            if (editedStripData) {
+                const link = document.createElement('a');
+                link.download = `edited-photo-strip-${new Date().getTime()}.png`;
+                link.href = editedStripData;
+                link.click();
+                alert('🎉 Edited photo strip downloaded!');
+            } else {
+                alert('No edited strip found to download.');
+            }
+        }
+
+function goHome() {
+    localStorage.removeItem('capturedPhotos');
+    localStorage.removeItem('editedPhotoStrip');
+    window.location.href = 'capture.html';
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photobooth - About Us</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <!-- Assuming the same external stylesheet for consistent styling -->
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+        /* This is the style for the new translucent content block */
+        .translucent-box {
+            background-color: rgba(145, 129, 140, 0.793);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(18, 1, 1, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #401821;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            /* Flex properties to center the box within the hero-content */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .translucent-box h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .translucent-box p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .nav a {
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: #ffffff; /* Or a color that indicates it's the active page */
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .translucent-box {
+                padding: 1.5rem;
+                border-radius: 0.75rem;
+            }
+
+            .translucent-box h1 {
+                font-size: 2rem;
+            }
+
+            .translucent-box p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Hero section with the same background as the home page -->
+    <div class="hero">
+        <!-- Translucent content box on top of the background -->
+        <div class="hero-content">
+            <div class="translucent-box">
+                <h1>About Us</h1>
+                <p>Welcome to Photobooth, where we believe every moment is worth capturing. Our mission is to provide a seamless and enjoyable experience that turns simple events into unforgettable memories. We're passionate about photography and dedicated to delivering high-quality, fun, and creative services for all occasions.</p>
+                <p>Our photobooth is equipped with state-of-the-art technology, customizable props, and a variety of backdrops to perfectly match your event's theme. Whether it's a wedding, a birthday party, a corporate event, or a simple get-together, we're here to add that extra spark of magic.</p>
+                <p>Thank you for choosing us to be a part of your story!</p>
+            </div>
+        </div>
+
+        <!-- The same canvas and navigation bar -->
+        <canvas id="canvas"></canvas>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="capture.html">Capture</a>
+        </nav>
+    </div>
+</body>
+</html>

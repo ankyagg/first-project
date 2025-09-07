@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adore Moments</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style(a).css">
+    <script src="../static/js/edit.js"></script>
+    <style>
+
+    </style>
+</head>
+<body id="edit">
+    <div class="edit-container">
+        <div class="left-panel">
+            <h2 class="panel-title"></h2>
+            <div class="action-buttons">
+                <div class="container-button" onclick="downloadFinalStrip()">
+                    <div class="hover bt-1"></div>
+                    <div class="hover bt-2"></div>
+                    <div class="hover bt-3"></div>
+                    <div class="hover bt-4"></div>
+                    <div class="hover bt-5"></div>
+                    <div class="hover bt-6"></div>
+                    <button></button>
+                </div>
+                <button class="action-btn secondary-btn" onclick="goBackToCapture()">🔙 Back</button>
+            </div>
+            <div id="frameContainer" class="frame-container">
+                <canvas id="photoStripCanvas" width="700" height="2100"></canvas>
+            </div>
+            <div class="canvas-info">
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Right Panel - Customization Options -->
+        <div class="right-panel">
+
+            <!-- Themes & Backgrounds Section -->
+            <div class="themes-section">
+                <div class="section-header">
+                    <h3 class="section-title">Themes & Backgrounds</h3>
+                    <p class="section-description">Choose a theme to transform your photo strip</p>
+                    <br>
+                </div>
+
+                <div class="themes-grid">
+                    <div class="theme-card" onclick="applyTheme('filmstrip')">
+    <div class="theme-icon">🎞️</div>
+    <div class="theme-label">Filmstrip</div>
+</div>
+                    <div class="theme-card" onclick="applyTheme('classic')">
+                        <div class="theme-icon">🤍</div>
+                        <div class="theme-label">Classic</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('vintage')">
+                        <div class="theme-icon">📸</div>
+                        <div class="theme-label">Vintage</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('plainMaroon')">
+    <div class="theme-icon">🟥</div>
+    <div class="theme-label">Maroon</div>
+</div>
+<div class="theme-card" onclick="applyTheme('plainRed')">
+    <div class="theme-icon">🔴</div>
+    <div class="theme-label">Red</div>
+</div>
+<div class="theme-card" onclick="applyTheme('plainPink')">
+    <div class="theme-icon">🌸</div>
+    <div class="theme-label">Pink</div>
+</div>
+<div class="theme-card" onclick="applyTheme('plainBlue')">
+    <div class="theme-icon">🔵</div>
+    <div class="theme-label">Blue</div>
+</div>
+<div class="theme-card" onclick="applyTheme('plainBlack')">
+    <div class="theme-icon">⬛</div>
+    <div class="theme-label">Black</div>
+</div>
+
+                    <div class="theme-card" onclick="applyTheme('summer')">
+                        <div class="theme-icon">🌴</div>
+                        <div class="theme-label">Summer</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('love')">
+                        <div class="theme-icon">💕</div>
+                        <div class="theme-label">Love</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('space')">
+                        <div class="theme-icon">🌟</div>
+                        <div class="theme-label">Space</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('neonGrid')">
+                        <div class="theme-icon">💫</div>
+                        <div class="theme-label">Neon</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('autumn')">
+                        <div class="theme-icon">🍂</div>
+                        <div class="theme-label">Autumn</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('Matcha')">
+                        <div class="theme-icon">🌿</div>
+                        <div class="theme-label">Matcha</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('spring')">
+                        <div class="theme-icon">🌸</div>
+                        <div class="theme-label">Spring</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('ocean')">
+                        <div class="theme-icon">🌊</div>
+                        <div class="theme-label">Ocean</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('sunset')">
+                        <div class="theme-icon">🌅</div>
+                        <div class="theme-label">Sunset</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('forest')">
+                        <div class="theme-icon">🌲</div>
+                        <div class="theme-label">Forest</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('midnight')">
+                        <div class="theme-icon">🌙</div>
+                        <div class="theme-label">Midnight</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('galactic')">
+                        <div class="theme-icon">🌈</div>
+                        <div class="theme-label">galactic</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('minimalist')">
+                        <div class="theme-icon">⚪</div>
+                        <div class="theme-label">Minimalist</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('pastel')">
+                        <div class="theme-icon">🎨</div>
+                        <div class="theme-label">Pastel</div>
+
+                    </div>
+                    <div class="theme-card" onclick="applyTheme('gradient')">
+                        <div class="theme-icon">🔮</div>
+                        <div class="theme-label">Gradient</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="section-divider"></div>
+
+            <!-- Stickers Section -->
+            <div class="stickers-section">
+                <div class="section-header">
+                    <h3 class="section-title">Add Stickers</h3>
+                    <p class="section-description">Click stickers to add fun decorations to your strip</p>
+                </div>
+                <div class="stickers-grid">
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/heart.png')" title="Heart">
+                        <img src="../assets/heart.png" alt="Heart" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/cat.png')" title="Cat">
+                        <img src="../assets/cat.png" alt="Cat" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/dog.png')" title="Dog">
+                        <img src="../assets/dog.png" alt="Dog" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/disco.png')" title="disco">
+                        <img src="../assets/disco.png" alt="disco" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/ribbon.jpg')" title="Ribbon">
+                        <img src="../assets/ribbon.jpg" alt="Ribbon" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/kissy.png')" title="Kiss">
+                        <img src="../assets/kissy.png" alt="Kiss" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/pearl.png')" title="Pearl">
+                        <img src="../assets/pearl.png" alt="Pearl" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/film.png')" title="Film">
+                        <img src="../assets/film.png" alt="Film" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/flower.png')" title="flower">
+                        <img src="../assets/flower.png" alt="flower" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/cutecat.png')" title="Cute Cat">
+                        <img src="../assets/cutecat.png" alt="Cute Cat" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/flowers.png')" title="Flowers">
+                        <img src="../assets/flowers.png" alt="flowers" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/red-flower.png')" title="Red Flowers">
+                        <img src="../assets/red-flower.png" alt="red-flowers" class="sticker-icon">
+                    </button>
+                    <button class="sticker-btn" onclick="addImageSticker('../assets/sticker.png')" title="sticker">
+                        <img src="../assets/sticker.png" alt="sticker" class="sticker-icon">
+                    </button>
+                    <!-- Camera -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/camera.png')" title="Camera">
+  <img src="../assets/camera.png" alt="Camera" class="sticker-icon">
+</button>
+
+<!-- Board -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/board.png')" title="Board">
+  <img src="../assets/board.png" alt="Board" class="sticker-icon">
+</button>
+
+<!-- Bestie -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/bestie.png')" title="Bestie">
+  <img src="../assets/bestie.png" alt="Bestie" class="sticker-icon">
+</button>
+
+<!-- Girlies -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/girlies.png')" title="Girlies">
+  <img src="../assets/girlies.png" alt="Girlies" class="sticker-icon">
+</button>
+
+<!-- Black Cat -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/blackcat.png')" title="Black Cat">
+  <img src="../assets/blackcat.png" alt="Black Cat" class="sticker-icon">
+</button>
+
+<!-- Music -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/music.png')" title="Music">
+  <img src="../assets/music.png" alt="Music" class="sticker-icon">
+</button>
+
+<!-- Spiderman -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/spidy.png')" title="Spiderman">
+  <img src="../assets/spidy.png" alt="Spiderman" class="sticker-icon">
+</button>
+
+<!-- Cinema -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/cinema.png')" title="Cinema">
+  <img src="../assets/cinema.png" alt="Cinema" class="sticker-icon">
+</button>
+
+<!-- Popcorn -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/popcorn.png')" title="Popcorn">
+  <img src="../assets/popcorn.png" alt="Popcorn" class="sticker-icon">
+</button>
+
+<!-- Golden Snitch -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/snitch.png')" title="Snitch">
+  <img src="../assets/snitch.png" alt="Snitch" class="sticker-icon">
+</button>
+
+<!-- Gryffindor -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/gry.png')" title="Gryffindor">
+  <img src="../assets/gry.png" alt="Gryffindor" class="sticker-icon">
+</button>
+
+<!-- Slytherin -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/sly.png')" title="Slytherin">
+  <img src="../assets/sly.png" alt="Slytherin" class="sticker-icon">
+</button>
+
+<!-- Hufflepuff -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/puff.png')" title="Hufflepuff">
+  <img src="../assets/puff.png" alt="Hufflepuff" class="sticker-icon">
+</button>
+
+<!-- Ravenclaw -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/rav.png')" title="Ravenclaw">
+  <img src="../assets/rav.png" alt="Ravenclaw" class="sticker-icon">
+</button>
+
+<!-- Hogwarts Logo / HP -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/hp.png')" title="HP">
+  <img src="../assets/hp.png" alt="HP" class="sticker-icon">
+</button>
+
+<!-- Broom -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/broom.png')" title="Broom">
+  <img src="../assets/broom.png" alt="Broom" class="sticker-icon">
+</button>
+
+<!-- Letter -->
+<button class="sticker-btn" onclick="addImageSticker('../assets/letter.png')" title="Letter">
+  <img src="../assets/letter.png" alt="Letter" class="sticker-icon">
+</button>
+
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary-btn" onclick="clearDecorations()">🗑️ Clear All</button>
+                <button class="action-btn primary-btn" onclick="addCustomText()">📝 Add Text</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/edit.js"></script>
+</body>
+</html>
